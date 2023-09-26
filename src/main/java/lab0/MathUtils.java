@@ -1,3 +1,5 @@
+package lab0;
+
 class MathUtils {
     public boolean isNarcissistic(int number) {
 
@@ -10,8 +12,7 @@ class MathUtils {
             remainingNumber = remainingNumber / 10;
             result += (int) Math.pow(digit, length);
         }
-        
+
         return result == number; 
     }
-
 }
