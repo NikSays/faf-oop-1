@@ -3,11 +3,28 @@ package lab1.universityStructure;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import lab1.session.SessionManager;
+
 public class University {
     private ArrayList<Faculty> faculties;
 
-    public University() {
-        this.faculties = new ArrayList<Faculty>();
+    // Depends on any session manager, as long as it implements save and load.
+    // Makes it easier to change format later.
+    private SessionManager sessionManager;
+
+    public University(SessionManager sessionManager) {
+        this.sessionManager = sessionManager;
+
+        try {
+            this.faculties = this.sessionManager.load();
+        } catch (Exception e) {
+            // TODO log error
+            this.faculties = new ArrayList<Faculty>();
+        }
+    }
+
+    public void saveSession() throws Exception {
+        this.sessionManager.save(faculties);
     }
 
     public void addFaculty(Faculty faculty) {
