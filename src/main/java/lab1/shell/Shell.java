@@ -1,4 +1,4 @@
-package lab1;
+package lab1.shell;
 
 public class Shell {
     public static void run() {
