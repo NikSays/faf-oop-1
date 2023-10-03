@@ -27,9 +27,14 @@ public class University {
         this.sessionManager.save(faculties);
     }
 
-    public void addFaculty(Faculty faculty) {
-        // TODO check existing abbreviation
-        this.faculties.add(faculty);
+    public void addFaculty(Faculty newFaculty) {
+        boolean exists = faculties.stream().
+            anyMatch(faculty -> faculty.getAbbreviation().equals(newFaculty.getAbbreviation()));
+        if (exists) {
+            throw new Error("faculty exists");
+        }
+        
+        this.faculties.add(newFaculty);
     }
 
     public Optional<Faculty> findFaculty(String abbreviation) {

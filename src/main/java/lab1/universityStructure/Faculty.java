@@ -29,9 +29,14 @@ public class Faculty {
         return this.studyField;
     }
 
-    public void addStudent(Student student) {
-        // TODO check existing email
-        this.students.add(student);
+    public void addStudent(Student newStudent) {
+        boolean exists = this.students.stream().
+        anyMatch(student -> student.getEmail().equals(newStudent.getEmail()));
+        if (exists) {
+            throw new Error("faculty exists");
+        }
+        
+        this.students.add(newStudent);
     }
 
     public Optional<Student> findStudent(String email) {
