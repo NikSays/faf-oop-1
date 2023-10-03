@@ -16,6 +16,7 @@ public class TXTSessionManager implements SessionManager{
         this.filepath = filepath;
     }
 
+    @Override
     public void save(ArrayList<Faculty> faculties) throws IOException{
         FileOutputStream writeData = new FileOutputStream(filepath);
         ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
@@ -25,13 +26,13 @@ public class TXTSessionManager implements SessionManager{
         writeStream.close();
     }
 
+    @Override
     public ArrayList<Faculty> load()  throws IOException, ClassNotFoundException {
         FileInputStream readData = new FileInputStream(filepath);
         ObjectInputStream readStream = new ObjectInputStream(readData);
     
         ArrayList<Faculty> result = (ArrayList<Faculty>) readStream.readObject();
         readStream.close();
-        
         return result;
     }
 }
