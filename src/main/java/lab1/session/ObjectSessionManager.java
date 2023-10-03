@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 import lab1.universityStructure.Faculty;
 
-public class TXTSessionManager implements SessionManager{
+public class ObjectSessionManager implements SessionManager{
     private String filepath;
 
-    public TXTSessionManager(String filepath) {
+    public ObjectSessionManager(String filepath) {
         this.filepath = filepath;
     }
 
