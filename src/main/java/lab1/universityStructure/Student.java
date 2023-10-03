@@ -1,22 +1,22 @@
 package lab1.universityStructure;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Student {
     private String firstName;
     private String lastName;
     private String email;
-    private Date   enrollmentDate;
-    private Date   dateOfBirth;
+    private LocalDate   enrollmentDate;
+    private LocalDate   dateOfBirth;
     private boolean graduated;
 
-    public Student(String firstName, String lastName, String email, Date dateOfBirth) {
+    public Student(String firstName, String lastName, String email, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         
-        this.enrollmentDate = new Date();
+        this.enrollmentDate = LocalDate.now();
         this.graduated = false;
     }
 
@@ -28,11 +28,11 @@ public class Student {
         return this.email;
     }
 
-    public Date getEnrollmentDate() {
+    public LocalDate getEnrollmentDate() {
         return this.enrollmentDate;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return this.dateOfBirth;
     }
 
