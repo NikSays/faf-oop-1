@@ -3,6 +3,8 @@ package lab1.universityStructure;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import lab1.batch.BatchLoader;
+
 public class Faculty {
     private String name;
     private String abbreviation;
@@ -35,7 +37,7 @@ public class Faculty {
         if (exists) {
             throw new Error("faculty exists");
         }
-        
+
         this.students.add(newStudent);
     }
 
@@ -61,5 +63,16 @@ public class Faculty {
 
     public boolean isStudentHere(String email) {
         return this.findStudent(email).isPresent();
+    }
+
+    public void batchAddStudents(String filepath) throws Exception{
+        BatchLoader.loadNewStudents(filepath).
+        forEach(student -> this.addStudent(student));
+    }
+
+    public void batchGraduateStudents(String filepath) throws Exception{
+        // TODO what if does not exist
+        BatchLoader.loadGraduationEmails(filepath).
+        forEach(student -> this.findStudent(student).get().graduate());
     }
 }

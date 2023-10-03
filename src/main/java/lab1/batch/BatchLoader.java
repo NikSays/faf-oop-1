@@ -17,8 +17,10 @@ public class BatchLoader {
         String studentLine = null;
         
         while ((studentLine = bufReader.readLine()) != null) {   
-            String[] studentValues = studentLine.split(",");
+            // Any amount of spaces after the comma
+            String[] studentValues = studentLine.split(",\\s*");
             if (studentValues.length != 4) {
+                // TODO log and skip?
                 bufReader.close();
                 throw new Error("malformed student in file");
             }
