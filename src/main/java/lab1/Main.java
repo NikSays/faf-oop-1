@@ -1,9 +1,15 @@
 package lab1;
 
-import lab1.shell.Shell;
+import java.io.IOException;
+
+import lab1.log.Level;
+import lab1.log.TXTLogger;
 
 public class Main {
-    public static void main(String[] args) {
-        Shell.run();
+    public static void main(String[] args) throws IOException {
+        TXTLogger.init("./log.txt", Level.DEBUG);
+
+
+
     }
 }

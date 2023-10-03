@@ -4,40 +4,52 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class TXTLogger implements Logger {
+public class TXTLogger{
+    // Use singleton pattern to have one global logger
+    private static TXTLogger singleInstance = null;
+    
+    public static void init(String filepath, Level level) throws IOException{
+        singleInstance = new TXTLogger(filepath, level);
+    }
+
+    public static TXTLogger getInstance() {
+        if (singleInstance == null) {
+            throw new java.lang.Error("logger not initialized");
+        }
+        return singleInstance;
+    }
+
+    // Class definition
     private PrintWriter writer;
     private Level level;
 
     // TODO custom string
-    public TXTLogger(String filepath, Level level) throws IOException{
+    private TXTLogger(String filepath, Level level) throws IOException{
+
         FileWriter fileWriter = new FileWriter(filepath);
         this.writer = new PrintWriter(fileWriter);
 
         this.level = level;
     }
 
-    @Override
     public void Debug(String... msg) {
         if (this.level.includes(Level.DEBUG)){
             this.writer.print(msg);
         }
     }
 
-    @Override
     public void Info(String... msg) {
         if (this.level.includes(Level.INFO)){
             this.writer.print(msg);
         }
     }
 
-    @Override
     public void Warn(String... msg) {
         if (this.level.includes(Level.WARN)){
             this.writer.print(msg);
         }
     }
 
-    @Override
     public void Error(String... msg) {
         if (this.level.includes(Level.ERROR)){
             this.writer.print(msg);
