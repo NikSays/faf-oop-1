@@ -13,23 +13,31 @@ public abstract class Menu {
     public void run() {
         boolean continueLoop = true;
         while (continueLoop) {
-            System.out.println("\nAvailable options:");
+            System.out.println("Available options:");
             this.printOptions();
+            System.out.println();
             this.printPrompt(this.menuPrompt);
             String choice = this.scanner.nextLine();
+            System.out.println();
             continueLoop = this.handleChoice(choice);
+
+            System.out.println();
+            if (continueLoop) {
+                System.out.print("Press ENTER to continue...");
+                this.scanner.nextLine();
+            }
         }
     }
 
     protected void printPrompt(String prompt) {
-        System.out.print("\n" + prompt + "> ");
+        System.out.print(prompt + "> ");
     }
 
     protected void printInvalid() {
-        System.out.println("\nInvalid input. Try again");
+        System.out.println();
+        System.out.println("Invalid input. Try again");
     }
 
-    // TODO?
     protected void printOptions() {
         this.options.forEach(System.out::println);
     }

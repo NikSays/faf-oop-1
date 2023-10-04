@@ -44,6 +44,13 @@ public class UniversityMenu extends Menu {
 
             case "a":
                 // TODO toString
+                System.out.println("All Faculties:");
+
+                if (this.university.getFaculties().isEmpty()) {
+                    System.out.println("Empty...");
+                    break;
+                }
+
                 this.university.getFaculties().
                         forEach(faculty -> System.out.println(faculty.getName()));
                 break;
@@ -56,6 +63,12 @@ public class UniversityMenu extends Menu {
                 StudyField sf = this.studyFieldOptions.get(sfString);
 
                 System.out.println();
+
+                System.out.println("Faculties in " + sf.getName() + ":");
+                if (this.university.getFaculties().isEmpty()) {
+                    System.out.println("Empty...");
+                    break;
+                }
 
                 this.university.getFaculties(sf).
                         forEach(faculty -> System.out.println(faculty.getName()));
@@ -76,14 +89,16 @@ public class UniversityMenu extends Menu {
     }
 
     private void printStudyFieldOptions() {
-        System.out.println("\nAvailable Study Fields:");
+        System.out.println("Available Study Fields:");
         this.studyFieldOptions.forEach((key, value) -> System.out.println(key + " - " + value.getName()));
+        System.out.println();
     }
 
     private void printFacultyOptions() {
-        System.out.println("\nAvailable Faculty:");
+        System.out.println("Available Faculty:");
         this.university.getFaculties().
                 forEach(faculty -> System.out.println(faculty.getAbbreviation() + " - " + faculty.getName()));
+        System.out.println();
     }
 
     private void newFaculty() {
@@ -93,6 +108,7 @@ public class UniversityMenu extends Menu {
         this.printPrompt("Input faculty abbreviation");
         String abbr = this.scanner.nextLine();
 
+        System.out.println();
         this.printStudyFieldOptions();
         this.printPrompt("Input study field");
         String sfString = this.scanner.nextLine();
@@ -102,6 +118,7 @@ public class UniversityMenu extends Menu {
 
         try {
             this.university.addFaculty(new Faculty(name, abbr, sf));
+            System.out.println("Successfully added faculty");
         } catch (Exception e) {
             System.out.println("Failed to add faculty: " + e.getMessage());
         }
