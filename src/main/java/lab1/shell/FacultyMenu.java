@@ -30,41 +30,24 @@ public class FacultyMenu extends Menu {
             case "n":
                 this.newStudent();
                 break;
-
             case "g":
                 this.graduateStudent();
                 break;
-
             case "dc":
                 // TODO toString
-                System.out.println(this.faculty.getStudents(false));
+                this.displayStudents(false);
                 break;
-
             case "dg":
                 // TODO toString
-                System.out.println(this.faculty.getStudents(true));
+                this.displayStudents(true);
                 break;
-
             case "i":
                 // TODO toString
-                this.printPrompt("Input EMail");
-                String email = this.scanner.nextLine();
-
-                System.out.println();
-
-                Optional<Student> student = this.faculty.findStudent(email);
-                if (student.isPresent()) {
-                    System.out.println("Found student:");
-                    System.out.println(student);
-                } else {
-                    System.out.println("No such student");
-                }
+                this.isStudent();
                 break;
-
             case "q":
                 System.out.println("Exiting faculty...");
                 return false;
-
             default:
                 this.printInvalid();
         }
@@ -90,7 +73,10 @@ public class FacultyMenu extends Menu {
             this.faculty.addStudent(new Student(firstName, lastName, email, dateOfBirth));
         } catch (Exception e) {
             System.out.println("Failed to add student: " + e.getMessage());
+            return;
         }
+
+        System.out.println("Successfully added student");
 
         try {
             this.university.saveSession();
@@ -111,6 +97,7 @@ public class FacultyMenu extends Menu {
             System.out.println("Student successfully graduated");
         } else {
             System.out.println("Student not found");
+            return;
         }
 
         try {
@@ -120,4 +107,29 @@ public class FacultyMenu extends Menu {
         }
     }
 
+    private void displayStudents(boolean graduated) {
+        System.out.println("Students:");
+
+        ArrayList<Student> students = this.faculty.getStudents(graduated);
+        if (students.isEmpty()) {
+            System.out.println("Empty...");
+            return;
+        }
+        System.out.println(students);
+    }
+
+    private void isStudent() {
+        this.printPrompt("Input EMail");
+        String email = this.scanner.nextLine();
+
+        System.out.println();
+
+        Optional<Student> student = this.faculty.findStudent(email);
+        if (student.isPresent()) {
+            System.out.println("Found student:");
+            System.out.println(student);
+        } else {
+            System.out.println("No such student");
+        }
+    }
 }

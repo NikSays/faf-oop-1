@@ -13,6 +13,9 @@ public abstract class Menu {
     public void run() {
         boolean continueLoop = true;
         while (continueLoop) {
+            // Clear screen
+            System.out.print("\033[H\033[2J");
+
             System.out.println("Available options:");
             this.printOptions();
             System.out.println();

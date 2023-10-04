@@ -11,7 +11,20 @@ public class Student implements Serializable {
     private final String dateOfBirth;
     private boolean graduated;
 
-    public Student(String firstName, String lastName, String email, String dateOfBirth) {
+    public Student(String firstName, String lastName, String email, String dateOfBirth) throws Exception {
+        if (firstName.isEmpty()) {
+            throw new Exception("empty first name");
+        }
+        if(lastName.isEmpty()) {
+            throw new Exception("empty last name");
+        }
+        if (email.isEmpty()) {
+            throw new Exception("empty email");
+        }
+        if (dateOfBirth.isEmpty()) {
+            throw new Exception("empty date of birth");
+        }
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

@@ -12,7 +12,17 @@ public class Faculty implements Serializable {
     private final ArrayList<Student> students;
     private final StudyField studyField;
 
-    public Faculty(String name, String abbreviation, StudyField studyField) {
+    public Faculty(String name, String abbreviation, StudyField studyField) throws Exception {
+        if (name.isEmpty()) {
+            throw new Exception("empty name");
+        }
+        if (abbreviation.isEmpty()) {
+            throw new Exception("empty abbreviation");
+        }
+        if (studyField == null) {
+            throw new Exception("empty study field");
+        }
+
         this.name = name;
         this.abbreviation = abbreviation;
         this.studyField = studyField;
