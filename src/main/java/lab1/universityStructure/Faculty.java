@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import lab1.batch.BatchLoader;
-
 public class Faculty implements Serializable {
     private final String name;
     private final String abbreviation;

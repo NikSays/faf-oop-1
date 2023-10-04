@@ -3,6 +3,7 @@ package lab1.universityStructure;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import lab1.log.TXTLogger;
 import lab1.session.SessionManager;
 
 public class University {
@@ -18,13 +19,13 @@ public class University {
         try {
             this.faculties = this.sessionManager.load();
         } catch (Exception e) {
-            // TODO log error
+            TXTLogger.get().Error("Failed to load state: " + e.getMessage());
             this.faculties = new ArrayList<>();
-            e.printStackTrace();
         }
     }
 
     public void saveSession() throws Exception {
+        TXTLogger.get().Debug("Saving state");
         this.sessionManager.save(this.faculties);
     }
 

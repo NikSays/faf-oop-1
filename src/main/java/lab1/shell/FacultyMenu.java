@@ -1,6 +1,7 @@
 package lab1.shell;
 
 import lab1.batch.BatchLoader;
+import lab1.log.TXTLogger;
 import lab1.universityStructure.Faculty;
 import lab1.universityStructure.Student;
 import lab1.universityStructure.University;
@@ -78,17 +79,20 @@ public class FacultyMenu extends Menu {
 
         try {
             this.faculty.addStudent(new Student(firstName, lastName, email, dateOfBirth));
+            System.out.println("Successfully added student");
+            TXTLogger.get().Info("Added student: " + email);
         } catch (Exception e) {
             System.out.println("Failed to add student: " + e.getMessage());
+            TXTLogger.get().Info("Failed to add student " + email + ": " + e);
             return;
         }
 
-        System.out.println("Successfully added student");
 
         try {
             this.university.saveSession();
         } catch (Exception e) {
             System.out.println("Failed to save state to disk. See logs");
+            TXTLogger.get().Error("Failed to save session: " + e);
         }
     }
 
@@ -106,11 +110,13 @@ public class FacultyMenu extends Menu {
 
         student.get().graduate();
         System.out.println("Student successfully graduated");
+        TXTLogger.get().Info("Graduated student: " + student.get().getEmail());
 
         try {
             this.university.saveSession();
         } catch (Exception e) {
             System.out.println("Failed to save state to disk. See logs");
+            TXTLogger.get().Error("Failed to save session: " + e);
         }
     }
 
@@ -154,13 +160,16 @@ public class FacultyMenu extends Menu {
             students = BatchLoader.loadNewStudents(filepath);
         } catch (Exception e) {
             System.out.println("Failed to load file: " + e.getMessage());
+            TXTLogger.get().Error("Failed to load batch enrollment file " + filepath + ": " + e);
             return;
         }
         students.forEach(student -> {
             try {
                 this.faculty.addStudent(student);
+                TXTLogger.get().Info("Added batch student: " + student.getEmail());
             } catch (Exception e) {
                 System.out.println("Failed to add student " + student.getName() + ": " + e.getMessage());
+                TXTLogger.get().Warn("Failed to batch add student " + student.getEmail() + ": " + e);
             }
         });
 
@@ -170,6 +179,7 @@ public class FacultyMenu extends Menu {
             this.university.saveSession();
         } catch (Exception e) {
             System.out.println("Failed to save state to disk. See logs");
+            TXTLogger.get().Error("Failed to save session: " + e);
         }
     }
 
@@ -184,6 +194,7 @@ public class FacultyMenu extends Menu {
             students = BatchLoader.loadGraduationEmails(filepath);
         } catch (Exception e) {
             System.out.println("Failed to load file " + e.getMessage());
+            TXTLogger.get().Error("Failed to load batch graduation file " + filepath + ": " + e);
             return;
         }
 
@@ -191,9 +202,12 @@ public class FacultyMenu extends Menu {
             Optional<Student> student = this.faculty.findStudent(email);
             if (!student.isPresent()) {
                 System.out.println("Student " + email + " not found");
+                TXTLogger.get().Warn("Failed to batch graduate student " + email + ": not found");
                 return;
             }
+
             student.get().graduate();
+            TXTLogger.get().Info("Graduated batch student: " + email);
 
         });
 
@@ -203,6 +217,7 @@ public class FacultyMenu extends Menu {
             this.university.saveSession();
         } catch (Exception e) {
             System.out.println("Failed to save state to disk. See logs");
+            TXTLogger.get().Error("Failed to save session: " + e);
         }
     }
 }

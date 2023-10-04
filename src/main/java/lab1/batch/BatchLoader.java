@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import lab1.log.TXTLogger;
 import lab1.universityStructure.Student;
 
 public class BatchLoader {
@@ -19,7 +20,7 @@ public class BatchLoader {
             // Any amount of spaces after the comma
             String[] studentValues = studentLine.split(",\\s*");
             if (studentValues.length != 4) {
-                // TODO log and skip?
+                TXTLogger.get().Warn("Malformed batch line: " + studentLine);
                 continue;
             }
 

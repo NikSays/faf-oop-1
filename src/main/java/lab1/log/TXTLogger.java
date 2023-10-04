@@ -3,6 +3,7 @@ package lab1.log;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 
 public class TXTLogger {
     // Use singleton pattern to have one global logger
@@ -12,9 +13,9 @@ public class TXTLogger {
         singleInstance = new TXTLogger(filepath, level);
     }
 
-    public static TXTLogger getInstance() throws Exception {
+    public static TXTLogger get() throws java.lang.Error {
         if (singleInstance == null) {
-            throw new Exception("logger not initialized");
+            throw new java.lang.Error("logger not initialized");
         }
         return singleInstance;
     }
@@ -26,33 +27,42 @@ public class TXTLogger {
     // TODO custom string
     private TXTLogger(String filepath, Level level) throws IOException {
 
-        FileWriter fileWriter = new FileWriter(filepath);
+        FileWriter fileWriter = new FileWriter(filepath, true);
         this.writer = new PrintWriter(fileWriter);
 
         this.level = level;
     }
 
-    public void Debug(String... msg) {
+    private void print(Level level, String msg) {
+        String formatted = String.format(
+                "%s [%5s] %s",
+                LocalDateTime.now(),
+                level, msg);
+        this.writer.println(formatted);
+        this.writer.flush();
+    }
+
+    public void Debug(String msg) {
         if (this.level.includes(Level.DEBUG)) {
-            this.writer.print(msg);
+            this.print(Level.DEBUG, msg);
         }
     }
 
-    public void Info(String... msg) {
+    public void Info(String msg) {
         if (this.level.includes(Level.INFO)) {
-            this.writer.print(msg);
+            this.print(Level.INFO, msg);
         }
     }
 
-    public void Warn(String... msg) {
+    public void Warn(String msg) {
         if (this.level.includes(Level.WARN)) {
-            this.writer.print(msg);
+            this.print(Level.WARN, msg);
         }
     }
 
-    public void Error(String... msg) {
+    public void Error(String msg) {
         if (this.level.includes(Level.ERROR)) {
-            this.writer.print(msg);
+            this.print(Level.ERROR, msg);
         }
     }
 }

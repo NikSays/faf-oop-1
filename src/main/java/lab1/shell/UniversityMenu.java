@@ -2,6 +2,7 @@ package lab1.shell;
 
 import java.util.*;
 
+import lab1.log.TXTLogger;
 import lab1.universityStructure.Faculty;
 import lab1.universityStructure.StudyField;
 import lab1.universityStructure.University;
@@ -41,11 +42,9 @@ public class UniversityMenu extends Menu {
                 this.searchStudent();
                 break;
             case "a":
-                // TODO toString
                 this.allFaculties();
                 break;
             case "f":
-                // TODO toString
                 this.findFaculty();
                 break;
             case "e":
@@ -95,15 +94,18 @@ public class UniversityMenu extends Menu {
 
         try {
             this.university.addFaculty(new Faculty(name, abbr, sf));
+            TXTLogger.get().Info("Added faculty: " + abbr);
             System.out.println("Successfully added faculty");
         } catch (Exception e) {
             System.out.println("Failed to add faculty: " + e.getMessage());
+            TXTLogger.get().Error("Failed to add faculty " + abbr + ": " + e);
         }
 
         try {
             this.university.saveSession();
         } catch (Exception e) {
             System.out.println("Failed to save state to disk. See logs");
+            TXTLogger.get().Error("Failed to save session: " + e);
         }
     }
 
@@ -113,9 +115,7 @@ public class UniversityMenu extends Menu {
 
         System.out.println();
 
-        Optional<Faculty> studentsFaculty = this.university.getFaculties().stream().
-                filter(faculty -> faculty.findStudent(email).isPresent()).
-                findFirst();
+        Optional<Faculty> studentsFaculty = this.university.findStudentFaculty(email);
 
         if (!studentsFaculty.isPresent()) {
             System.out.println("Student not found in any faculty");
@@ -134,9 +134,9 @@ public class UniversityMenu extends Menu {
         }
 
         this.university.getFaculties().forEach(faculty -> {
-                    System.out.println("------------");
-                    System.out.println(faculty.toString());
-                });
+            System.out.println("------------");
+            System.out.println(faculty.toString());
+        });
     }
 
     private void findFaculty() {

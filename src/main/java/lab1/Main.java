@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         // Initialize dependencies
         TXTLogger.init("./log.txt", Level.DEBUG);
+        TXTLogger.get().Debug("Started app");
         BinaryFileManager stateManager = new BinaryFileManager("./.session");
 
         UniversityMenu shell = new UniversityMenu(
@@ -21,5 +22,6 @@ public class Main {
         );
 
         shell.run();
+        TXTLogger.get().Debug("Exiting normally");
     }
 }
