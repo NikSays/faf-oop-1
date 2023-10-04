@@ -34,11 +34,9 @@ public class FacultyMenu extends Menu {
                 this.graduateStudent();
                 break;
             case "dc":
-                // TODO toString
                 this.displayStudents(false);
                 break;
             case "dg":
-                // TODO toString
                 this.displayStudents(true);
                 break;
             case "i":
@@ -115,7 +113,10 @@ public class FacultyMenu extends Menu {
             System.out.println("Empty...");
             return;
         }
-        System.out.println(students);
+        students.forEach(student -> {
+            System.out.println("------------");
+            System.out.println(student);
+        });
     }
 
     private void isStudent() {
@@ -127,7 +128,7 @@ public class FacultyMenu extends Menu {
         Optional<Student> student = this.faculty.findStudent(email);
         if (student.isPresent()) {
             System.out.println("Found student:");
-            System.out.println(student);
+            System.out.println(student.get());
         } else {
             System.out.println("No such student");
         }

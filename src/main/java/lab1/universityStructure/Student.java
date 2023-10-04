@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Student implements Serializable {
-    private final String firstName;
-    private final String lastName;
-    private final String email;
-    private final String enrollmentDate;
-    private final String dateOfBirth;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String enrollmentDate;
+    private String dateOfBirth;
     private boolean graduated;
 
     public Student(String firstName, String lastName, String email, String dateOfBirth) throws Exception {
@@ -56,5 +56,14 @@ public class Student implements Serializable {
 
     public void graduate() {
         this.graduated = true;
+    }
+
+    public String toString() {
+        return String.format(
+                "Name: %s %s \n" + "EMail: %s \n" + "Date of birth: %s \n" +
+                        "Enrollment date: %s \n" + "Graduated: %b",
+                this.firstName, this.lastName,
+                this.email, this.dateOfBirth,
+                this.enrollmentDate, this.graduated);
     }
 }

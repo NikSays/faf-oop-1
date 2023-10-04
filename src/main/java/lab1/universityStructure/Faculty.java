@@ -88,4 +88,11 @@ public class Faculty implements Serializable {
         BatchLoader.loadGraduationEmails(filepath).
                 forEach(student -> this.findStudent(student).get().graduate());
     }
+
+    public String toString() {
+        return String.format(
+                "%s (%s)\n" + "Study Field: %s",
+                this.name, this.abbreviation, this.studyField.getName()
+        );
+    }
 }

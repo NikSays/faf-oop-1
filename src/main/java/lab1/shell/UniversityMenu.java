@@ -42,7 +42,7 @@ public class UniversityMenu extends Menu {
                 break;
             case "a":
                 // TODO toString
-                this.addFaculty();
+                this.allFaculties();
                 break;
             case "f":
                 // TODO toString
@@ -125,7 +125,7 @@ public class UniversityMenu extends Menu {
         System.out.println("Student found in faculty: " + studentsFaculty.get().getName());
     }
 
-    private void addFaculty() {
+    private void allFaculties() {
         System.out.println("All Faculties:");
 
         if (this.university.getFaculties().isEmpty()) {
@@ -133,8 +133,10 @@ public class UniversityMenu extends Menu {
             return;
         }
 
-        this.university.getFaculties().
-                forEach(faculty -> System.out.println(faculty.getName()));
+        this.university.getFaculties().forEach(faculty -> {
+                    System.out.println("------------");
+                    System.out.println(faculty.toString());
+                });
     }
 
     private void findFaculty() {
@@ -156,7 +158,10 @@ public class UniversityMenu extends Menu {
         }
 
         this.university.getFaculties(sf).
-                forEach(faculty -> System.out.println(faculty.getName()));
+                forEach(faculty -> {
+                    System.out.println("------------");
+                    System.out.println(faculty.toString());
+                });
     }
 
     private void enterFaculty() {
