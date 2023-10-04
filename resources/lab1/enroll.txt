@@ -1,0 +1,5 @@
+Nicolai,   Nejintev, nicolai.nejintev@isa.utm.md, 2003-06-09
+Other,     Name,     other@email.com,             2002-01-23
+Sam,       Smith,    sam@protonmail.org,          1992-05-24
+Empty,             , data@email.com,              2000-02-02
+Malformed, Row
