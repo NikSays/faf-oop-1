@@ -27,11 +27,11 @@ public class University {
         this.sessionManager.save(faculties);
     }
 
-    public void addFaculty(Faculty newFaculty) {
+    public void addFaculty(Faculty newFaculty) throws Exception {
         boolean exists = faculties.stream().
             anyMatch(faculty -> faculty.getAbbreviation().equals(newFaculty.getAbbreviation()));
         if (exists) {
-            throw new Error("faculty exists");
+            throw new Exception("faculty exists");
         }
         
         this.faculties.add(newFaculty);

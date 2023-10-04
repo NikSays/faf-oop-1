@@ -12,9 +12,9 @@ public class TXTLogger{
         singleInstance = new TXTLogger(filepath, level);
     }
 
-    public static TXTLogger getInstance() {
+    public static TXTLogger getInstance() throws Exception {
         if (singleInstance == null) {
-            throw new java.lang.Error("logger not initialized");
+            throw new Exception("logger not initialized");
         }
         return singleInstance;
     }

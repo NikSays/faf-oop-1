@@ -1,11 +1,12 @@
 package lab1.universityStructure;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Optional;
 
 import lab1.batch.BatchLoader;
 
-public class Faculty {
+public class Faculty implements Serializable {
     private String name;
     private String abbreviation;
     private ArrayList<Student> students;
@@ -31,11 +32,11 @@ public class Faculty {
         return this.studyField;
     }
 
-    public void addStudent(Student newStudent) {
+    public void addStudent(Student newStudent) throws Exception {
         boolean exists = this.students.stream().
         anyMatch(student -> student.getEmail().equals(newStudent.getEmail()));
         if (exists) {
-            throw new Error("faculty exists");
+            throw new Exception("faculty exists");
         }
 
         this.students.add(newStudent);
@@ -67,7 +68,13 @@ public class Faculty {
 
     public void batchAddStudents(String filepath) throws Exception{
         BatchLoader.loadNewStudents(filepath).
-        forEach(student -> this.addStudent(student));
+        forEach(student -> {
+            try {
+                this.addStudent(student);
+            } catch (Exception e) {
+                // TODO LOG 
+            }
+        });
     }
 
     public void batchGraduateStudents(String filepath) throws Exception{

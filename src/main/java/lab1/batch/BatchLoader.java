@@ -22,7 +22,7 @@ public class BatchLoader {
             if (studentValues.length != 4) {
                 // TODO log and skip?
                 bufReader.close();
-                throw new Error("malformed student in file");
+                throw new Exception("malformed student in file");
             }
             
             LocalDate dateOfBirth = LocalDate.parse(studentValues[3]);
