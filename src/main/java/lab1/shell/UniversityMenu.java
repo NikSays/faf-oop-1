@@ -169,9 +169,7 @@ public class UniversityMenu extends Menu {
         this.printPrompt("Input faculty abbreviation");
         String abbreviation = this.scanner.nextLine();
 
-        Optional<Faculty> selectedFaculty = this.university.getFaculties().stream().
-                filter(faculty -> faculty.getAbbreviation().equals(abbreviation)).
-                findFirst();
+        Optional<Faculty> selectedFaculty = this.university.findFaculty(abbreviation);
 
         if (!selectedFaculty.isPresent()) {
             System.out.println("No such faculty abbreviation");

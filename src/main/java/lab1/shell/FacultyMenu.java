@@ -63,6 +63,15 @@ public class FacultyMenu extends Menu {
         return true;
     }
 
+    private void safeSaveState() {
+        try {
+            this.university.saveSession();
+        } catch (Exception e) {
+            System.out.println("Failed to save state to disk. See logs");
+            TXTLogger.get().Error("Failed to save session: " + e);
+        }
+    }
+
     private void newStudent() {
         this.printPrompt("Input first name");
         String firstName = this.scanner.nextLine();
@@ -89,12 +98,7 @@ public class FacultyMenu extends Menu {
         }
 
 
-        try {
-            this.university.saveSession();
-        } catch (Exception e) {
-            System.out.println("Failed to save state to disk. See logs");
-            TXTLogger.get().Error("Failed to save session: " + e);
-        }
+    this.safeSaveState();
     }
 
     private void graduateStudent() {
@@ -113,12 +117,7 @@ public class FacultyMenu extends Menu {
         System.out.println("Student successfully graduated");
         TXTLogger.get().Info("Graduated student: " + student.get().getEmail());
 
-        try {
-            this.university.saveSession();
-        } catch (Exception e) {
-            System.out.println("Failed to save state to disk. See logs");
-            TXTLogger.get().Error("Failed to save session: " + e);
-        }
+    this.safeSaveState();
     }
 
     private void displayStudents(boolean graduated) {
@@ -175,12 +174,7 @@ public class FacultyMenu extends Menu {
 
         System.out.println("Successfully added students");
 
-        try {
-            this.university.saveSession();
-        } catch (Exception e) {
-            System.out.println("Failed to save state to disk. See logs");
-            TXTLogger.get().Error("Failed to save session: " + e);
-        }
+    this.safeSaveState();
     }
 
     private void batchGraduate() {
@@ -212,11 +206,6 @@ public class FacultyMenu extends Menu {
 
         System.out.println("Successfully graduated students");
 
-        try {
-            this.university.saveSession();
-        } catch (Exception e) {
-            System.out.println("Failed to save state to disk. See logs");
-            TXTLogger.get().Error("Failed to save session: " + e);
-        }
+    this.safeSaveState();
     }
 }
