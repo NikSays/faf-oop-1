@@ -12,7 +12,7 @@ import lab1.universityStructure.University;
 public class Main {
     public static void main(String[] args) throws IOException {
         // Initialize dependencies
-        TXTLogger.init("./log.txt", Level.DEBUG);
+        TXTLogger.init("./lab1.log", Level.DEBUG);
         TXTLogger.get().Debug("Started app");
         BinaryFileManager stateManager = new BinaryFileManager("./.session");
 
