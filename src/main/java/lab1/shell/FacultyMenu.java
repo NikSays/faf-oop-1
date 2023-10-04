@@ -2,10 +2,8 @@ package lab1.shell;
 
 import lab1.universityStructure.Faculty;
 import lab1.universityStructure.Student;
-import lab1.universityStructure.StudyField;
 import lab1.universityStructure.University;
 
-import java.time.LocalDate;
 import java.util.*;
 
 public class FacultyMenu extends Menu {

@@ -9,5 +9,6 @@ import lab1.universityStructure.Faculty;
 // abstract class since no fields of functionality is common with BinaryFileManager
 public interface SessionManager {
     void save(ArrayList<Faculty> faculties) throws Exception;
+
     ArrayList<Faculty> load() throws Exception;
 }

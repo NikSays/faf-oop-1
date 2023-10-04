@@ -24,7 +24,7 @@ public class Faculty implements Serializable {
         return this.name;
     }
 
-    public String getAbbreviation(){
+    public String getAbbreviation() {
         return this.abbreviation;
     }
 
@@ -34,7 +34,7 @@ public class Faculty implements Serializable {
 
     public void addStudent(Student newStudent) throws Exception {
         boolean exists = this.students.stream().
-        anyMatch(student -> student.getEmail().equals(newStudent.getEmail()));
+                anyMatch(student -> student.getEmail().equals(newStudent.getEmail()));
         if (exists) {
             throw new Exception("faculty exists");
         }
@@ -44,38 +44,38 @@ public class Faculty implements Serializable {
 
     public Optional<Student> findStudent(String email) {
         return this.students.stream().
-            filter(student -> student.getEmail().equals(email)).
-            findFirst();
+                filter(student -> student.getEmail().equals(email)).
+                findFirst();
     }
 
     public ArrayList<Student> getStudents(boolean graduated) {
         ArrayList<Student> result = new ArrayList<>();
         if (graduated) {
             this.students.stream().
-                filter(Student::isGraduated).
-                forEach(result::add);
+                    filter(Student::isGraduated).
+                    forEach(result::add);
         } else {
             this.students.stream().
-                filter(student -> !student.isGraduated()).
-                forEach(result::add);
+                    filter(student -> !student.isGraduated()).
+                    forEach(result::add);
         }
         return result;
     }
 
-    public void batchAddStudents(String filepath) throws Exception{
+    public void batchAddStudents(String filepath) throws Exception {
         BatchLoader.loadNewStudents(filepath).
-        forEach(student -> {
-            try {
-                this.addStudent(student);
-            } catch (Exception e) {
-                // TODO LOG 
-            }
-        });
+                forEach(student -> {
+                    try {
+                        this.addStudent(student);
+                    } catch (Exception e) {
+                        // TODO LOG
+                    }
+                });
     }
 
-    public void batchGraduateStudents(String filepath) throws Exception{
+    public void batchGraduateStudents(String filepath) throws Exception {
         // TODO what if does not exist
         BatchLoader.loadGraduationEmails(filepath).
-        forEach(student -> this.findStudent(student).get().graduate());
+                forEach(student -> this.findStudent(student).get().graduate());
     }
 }

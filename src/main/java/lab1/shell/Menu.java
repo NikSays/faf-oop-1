@@ -10,12 +10,12 @@ public abstract class Menu {
 
     protected String menuPrompt;
 
-    public void run(){
+    public void run() {
         boolean continueLoop = true;
         while (continueLoop) {
             System.out.println("\nAvailable options:");
             this.printOptions();
-            this.printPrompt(menuPrompt);
+            this.printPrompt(this.menuPrompt);
             String choice = this.scanner.nextLine();
             continueLoop = this.handleChoice(choice);
         }
@@ -31,10 +31,9 @@ public abstract class Menu {
 
     // TODO?
     protected void printOptions() {
-        this.options.
-        forEach(System.out::println);
+        this.options.forEach(System.out::println);
     }
 
     // Should return true if main loop should continue
-    protected abstract boolean handleChoice(String choice); 
+    protected abstract boolean handleChoice(String choice);
 }

@@ -24,22 +24,22 @@ public class UniversityMenu extends Menu {
                 "q - Quit the program"));
 
         this.studyFieldOptions = new HashMap<>(Map.of(
-            "f", StudyField.FOOD_TECHNOLOGY,
-            "m", StudyField.MECHANICAL_ENGINEERING,
-            "s", StudyField.SOFTWARE_ENGINEERING,
-            "u", StudyField.URBANISM_ARCHITECTURE,
-            "v", StudyField.VETERINARY_MEDICINE
+                "f", StudyField.FOOD_TECHNOLOGY,
+                "m", StudyField.MECHANICAL_ENGINEERING,
+                "s", StudyField.SOFTWARE_ENGINEERING,
+                "u", StudyField.URBANISM_ARCHITECTURE,
+                "v", StudyField.VETERINARY_MEDICINE
         ));
     }
 
     protected boolean handleChoice(String choice) {
         switch (choice) {
             case "n":
-                newFaculty();
+                this.newFaculty();
                 break;
 
             case "s":
-                searchStudent();
+                this.searchStudent();
                 break;
 
             case "a":
@@ -50,7 +50,7 @@ public class UniversityMenu extends Menu {
 
             case "f":
                 // TODO toString
-                printStudyFieldOptions();
+                this.printStudyFieldOptions();
                 this.printPrompt("Input study field");
                 String sfString = this.scanner.nextLine();
                 StudyField sf = this.studyFieldOptions.get(sfString);

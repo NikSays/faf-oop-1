@@ -16,8 +16,8 @@ public class Main {
         BinaryFileManager stateManager = new BinaryFileManager("./.session");
 
         UniversityMenu shell = new UniversityMenu(
-            new Scanner(System.in),
-            new University(stateManager)
+                new Scanner(System.in),
+                new University(stateManager)
         );
 
         shell.run();

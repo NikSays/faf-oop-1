@@ -4,11 +4,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class TXTLogger{
+public class TXTLogger {
     // Use singleton pattern to have one global logger
     private static TXTLogger singleInstance = null;
-    
-    public static void init(String filepath, Level level) throws IOException{
+
+    public static void init(String filepath, Level level) throws IOException {
         singleInstance = new TXTLogger(filepath, level);
     }
 
@@ -24,7 +24,7 @@ public class TXTLogger{
     private final Level level;
 
     // TODO custom string
-    private TXTLogger(String filepath, Level level) throws IOException{
+    private TXTLogger(String filepath, Level level) throws IOException {
 
         FileWriter fileWriter = new FileWriter(filepath);
         this.writer = new PrintWriter(fileWriter);
@@ -33,25 +33,25 @@ public class TXTLogger{
     }
 
     public void Debug(String... msg) {
-        if (this.level.includes(Level.DEBUG)){
+        if (this.level.includes(Level.DEBUG)) {
             this.writer.print(msg);
         }
     }
 
     public void Info(String... msg) {
-        if (this.level.includes(Level.INFO)){
+        if (this.level.includes(Level.INFO)) {
             this.writer.print(msg);
         }
     }
 
     public void Warn(String... msg) {
-        if (this.level.includes(Level.WARN)){
+        if (this.level.includes(Level.WARN)) {
             this.writer.print(msg);
         }
     }
 
     public void Error(String... msg) {
-        if (this.level.includes(Level.ERROR)){
+        if (this.level.includes(Level.ERROR)) {
             this.writer.print(msg);
         }
     }

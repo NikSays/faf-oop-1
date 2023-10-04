@@ -13,6 +13,6 @@ class MathUtils {
             result += (int) Math.pow(digit, length);
         }
 
-        return result == number; 
+        return result == number;
     }
 }

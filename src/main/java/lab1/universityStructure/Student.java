@@ -7,8 +7,8 @@ public class Student implements Serializable {
     private final String firstName;
     private final String lastName;
     private final String email;
-    private final String   enrollmentDate;
-    private final String   dateOfBirth;
+    private final String enrollmentDate;
+    private final String dateOfBirth;
     private boolean graduated;
 
     public Student(String firstName, String lastName, String email, String dateOfBirth) {
@@ -16,7 +16,7 @@ public class Student implements Serializable {
         this.lastName = lastName;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
-        
+
         this.enrollmentDate = LocalDate.now().toString();
         this.graduated = false;
     }

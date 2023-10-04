@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import lab1.universityStructure.Faculty;
 
-public class BinaryFileManager implements SessionManager{
+public class BinaryFileManager implements SessionManager {
     private final String filepath;
 
     public BinaryFileManager(String filepath) {
@@ -18,7 +18,7 @@ public class BinaryFileManager implements SessionManager{
 
     @Override
     public void save(ArrayList<Faculty> faculties) throws IOException {
-        FileOutputStream writeData = new FileOutputStream(filepath);
+        FileOutputStream writeData = new FileOutputStream(this.filepath);
         ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
 
         writeStream.writeObject(faculties);
@@ -27,10 +27,10 @@ public class BinaryFileManager implements SessionManager{
     }
 
     @Override
-    public ArrayList<Faculty> load()  throws IOException, ClassNotFoundException {
-        FileInputStream readData = new FileInputStream(filepath);
+    public ArrayList<Faculty> load() throws IOException, ClassNotFoundException {
+        FileInputStream readData = new FileInputStream(this.filepath);
         ObjectInputStream readStream = new ObjectInputStream(readData);
-    
+
         ArrayList<Faculty> result = (ArrayList<Faculty>) readStream.readObject();
         readStream.close();
         return result;

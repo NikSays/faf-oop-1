@@ -20,27 +20,28 @@ public class University {
         } catch (Exception e) {
             // TODO log error
             this.faculties = new ArrayList<>();
+            e.printStackTrace();
         }
     }
 
     public void saveSession() throws Exception {
-        this.sessionManager.save(faculties);
+        this.sessionManager.save(this.faculties);
     }
 
     public void addFaculty(Faculty newFaculty) throws Exception {
-        boolean exists = faculties.stream().
-            anyMatch(faculty -> faculty.getAbbreviation().equals(newFaculty.getAbbreviation()));
+        boolean exists = this.faculties.stream().
+                anyMatch(faculty -> faculty.getAbbreviation().equals(newFaculty.getAbbreviation()));
         if (exists) {
             throw new Exception("faculty exists");
         }
-        
+
         this.faculties.add(newFaculty);
     }
 
     public Optional<Faculty> findFaculty(String abbreviation) {
         return this.faculties.stream().
-            filter(faculty -> faculty.getAbbreviation().equals(abbreviation)).
-            findFirst();
+                filter(faculty -> faculty.getAbbreviation().equals(abbreviation)).
+                findFirst();
     }
 
     public ArrayList<Faculty> getFaculties() {
@@ -51,14 +52,14 @@ public class University {
     public ArrayList<Faculty> getFaculties(StudyField studyField) {
         ArrayList<Faculty> result = new ArrayList<>();
         this.faculties.stream().
-            filter(faculty -> faculty.getStudyField().equals(studyField)).
-            forEach(result::add);
+                filter(faculty -> faculty.getStudyField().equals(studyField)).
+                forEach(result::add);
         return result;
     }
 
     public Optional<Faculty> findStudentFaculty(String email) {
         return this.faculties.stream().
-            filter(faculty -> faculty.findStudent(email).isPresent()).
-            findFirst();
+                filter(faculty -> faculty.findStudent(email).isPresent()).
+                findFirst();
     }
 }

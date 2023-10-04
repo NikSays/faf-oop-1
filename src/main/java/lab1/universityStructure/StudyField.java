@@ -7,7 +7,7 @@ public enum StudyField {
     URBANISM_ARCHITECTURE("Urbanism and Architecture"),
     VETERINARY_MEDICINE("Veterinary Medicine");
 
-    
+
     private final String displayName;
 
     StudyField(String displayName) {
