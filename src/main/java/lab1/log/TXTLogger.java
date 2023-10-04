@@ -24,7 +24,6 @@ public class TXTLogger {
     private final PrintWriter writer;
     private final Level level;
 
-    // TODO custom string
     private TXTLogger(String filepath, Level level) throws IOException {
 
         FileWriter fileWriter = new FileWriter(filepath, true);

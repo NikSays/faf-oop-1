@@ -9,6 +9,7 @@ import lab1.universityStructure.University;
 import java.util.*;
 
 public class FacultyMenu extends Menu {
+    // Need university to save global state on faculty changes
     private final University university;
     private final Faculty faculty;
 
