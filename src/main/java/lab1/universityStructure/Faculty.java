@@ -62,10 +62,6 @@ public class Faculty implements Serializable {
         return result;
     }
 
-    public boolean isStudentHere(String email) {
-        return this.findStudent(email).isPresent();
-    }
-
     public void batchAddStudents(String filepath) throws Exception{
         BatchLoader.loadNewStudents(filepath).
         forEach(student -> {

@@ -1,0 +1,125 @@
+package lab1.shell;
+
+import lab1.universityStructure.Faculty;
+import lab1.universityStructure.Student;
+import lab1.universityStructure.StudyField;
+import lab1.universityStructure.University;
+
+import java.time.LocalDate;
+import java.util.*;
+
+public class FacultyMenu extends Menu {
+    private final University university;
+    private final Faculty faculty;
+
+    public FacultyMenu(Scanner scanner, University university, Faculty faculty) {
+        this.scanner = scanner;
+        this.university = university;
+        this.faculty = faculty;
+
+        this.menuPrompt = "Faculty " + faculty.getAbbreviation();
+        this.options = new ArrayList<>(List.of(
+                "n  - Create a new student",
+                "g  - Graduate student",
+                "dc - Display current students",
+                "dg - Display graduated students",
+                "i  - Is a student in the faculty",
+                "q  - Quit the faculty"));
+    }
+
+    protected boolean handleChoice(String choice) {
+        switch (choice) {
+            case "n":
+                this.newStudent();
+                break;
+
+            case "g":
+                this.graduateStudent();
+                break;
+
+            case "dc":
+                // TODO toString
+                System.out.println(this.faculty.getStudents(false));
+                break;
+
+            case "dg":
+                // TODO toString
+                System.out.println(this.faculty.getStudents(true));
+                break;
+
+            case "i":
+                // TODO toString
+                this.printPrompt("Input EMail");
+                String email = this.scanner.nextLine();
+
+                System.out.println();
+
+                Optional<Student> student = this.faculty.findStudent(email);
+                if (student.isPresent()) {
+                    System.out.println("Found student:");
+                    System.out.println(student);
+                } else {
+                    System.out.println("No such student");
+                }
+                break;
+
+            case "q":
+                System.out.println("Exiting faculty...");
+                return false;
+
+            default:
+                this.printInvalid();
+        }
+        return true;
+    }
+
+    private void newStudent() {
+        this.printPrompt("Input first name");
+        String firstName = this.scanner.nextLine();
+
+        this.printPrompt("Input last name");
+        String lastName = this.scanner.nextLine();
+
+        this.printPrompt("Input EMail");
+        String email = this.scanner.nextLine();
+
+        this.printPrompt("Input Date of Birth (YYYY-MM-DD)");
+        String dateOfBirth = this.scanner.nextLine();
+
+        System.out.println();
+
+        try {
+            this.faculty.addStudent(new Student(firstName, lastName, email, dateOfBirth));
+        } catch (Exception e) {
+            System.out.println("Failed to add student: " + e.getMessage());
+        }
+
+        try {
+            this.university.saveSession();
+        } catch (Exception e) {
+            System.out.println("Failed to save state to disk. See logs");
+        }
+    }
+
+    private void graduateStudent() {
+        this.printPrompt("Input EMail");
+        String email = this.scanner.nextLine();
+
+        System.out.println();
+
+        Optional<Student> student = this.faculty.findStudent(email);
+        if (student.isPresent()) {
+            student.get().graduate();
+            System.out.println("Student successfully graduated");
+        } else {
+            System.out.println("Student not found");
+        }
+
+        try {
+            this.university.saveSession();
+        } catch (Exception e) {
+            System.out.println("Failed to save state to disk. See logs");
+        }
+    }
+
+}

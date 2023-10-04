@@ -58,7 +58,7 @@ public class University {
 
     public Optional<Faculty> findStudentFaculty(String email) {
         return this.faculties.stream().
-            filter(faculty -> faculty.isStudentHere(email)).
+            filter(faculty -> faculty.findStudent(email).isPresent()).
             findFirst();
     }
 }

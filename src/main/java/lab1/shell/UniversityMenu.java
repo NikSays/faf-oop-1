@@ -43,35 +43,47 @@ public class UniversityMenu extends Menu {
                 break;
 
             case "a":
+                // TODO toString
                 this.university.getFaculties().
                         forEach(faculty -> System.out.println(faculty.getName()));
                 break;
 
             case "f":
+                // TODO toString
                 printStudyFieldOptions();
                 this.printPrompt("Input study field");
                 String sfString = this.scanner.nextLine();
                 StudyField sf = this.studyFieldOptions.get(sfString);
+
+                System.out.println();
+
                 this.university.getFaculties(sf).
                         forEach(faculty -> System.out.println(faculty.getName()));
                 break;
 
             case "e":
+                this.enterFaculty();
                 break;
 
             case "q":
-            System.out.println("Exiting...");
-            return false;
+                System.out.println("Exiting...");
+                return false;
 
             default:
-            this.printInvalid();
+                this.printInvalid();
         }
         return true;
     }
 
     private void printStudyFieldOptions() {
-        System.out.println("Available Study Fields:");
+        System.out.println("\nAvailable Study Fields:");
         this.studyFieldOptions.forEach((key, value) -> System.out.println(key + " - " + value.getName()));
+    }
+
+    private void printFacultyOptions() {
+        System.out.println("\nAvailable Faculty:");
+        this.university.getFaculties().
+                forEach(faculty -> System.out.println(faculty.getAbbreviation() + " - " + faculty.getName()));
     }
 
     private void newFaculty() {
@@ -85,6 +97,8 @@ public class UniversityMenu extends Menu {
         this.printPrompt("Input study field");
         String sfString = this.scanner.nextLine();
         StudyField sf = this.studyFieldOptions.get(sfString);
+
+        System.out.println();
 
         try {
             this.university.addFaculty(new Faculty(name, abbr, sf));
@@ -102,13 +116,33 @@ public class UniversityMenu extends Menu {
     private void searchStudent() {
         this.printPrompt("Input EMail");
         String email = this.scanner.nextLine();
+
+        System.out.println();
+
         Optional<Faculty> studentsFaculty = this.university.getFaculties().stream().
-                filter(faculty -> faculty.isStudentHere(email)).
+                filter(faculty -> faculty.findStudent(email).isPresent()).
                 findFirst();
-        if (studentsFaculty.isPresent()) {
-            System.out.println("Student found in faculty: " + studentsFaculty.get().getName());
-        } else {
+        if (!studentsFaculty.isPresent()) {
             System.out.println("Student not found in any faculty");
+            return;
         }
+
+        System.out.println("Student found in faculty: " + studentsFaculty.get().getName());
+    }
+
+    private void enterFaculty() {
+        this.printFacultyOptions();
+        this.printPrompt("Input faculty abbreviation");
+        String abbreviation = this.scanner.nextLine();
+
+        Optional<Faculty> selectedFaculty = this.university.getFaculties().stream().
+                filter(faculty -> faculty.getAbbreviation().equals(abbreviation)).
+                findFirst();
+        if (!selectedFaculty.isPresent()) {
+            System.out.println("No such faculty abbreviation");
+            return;
+        }
+
+        new FacultyMenu(this.scanner, this.university, selectedFaculty.get()).run();
     }
 }

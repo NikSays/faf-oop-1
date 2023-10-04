@@ -26,7 +26,7 @@ public abstract class Menu {
     }
 
     protected void printInvalid() {
-        System.out.println("Invalid input. Try again");
+        System.out.println("\nInvalid input. Try again");
     }
 
     // TODO?
