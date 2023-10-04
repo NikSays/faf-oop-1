@@ -6,9 +6,9 @@ public enum Level {
     WARN(2),
     ERROR(3);
 
-    private int level;
+    private final int level;
 
-    private Level(int level) {
+    Level(int level) {
         this.level = level;
     }
 

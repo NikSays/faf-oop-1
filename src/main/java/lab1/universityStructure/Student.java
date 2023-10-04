@@ -3,11 +3,11 @@ package lab1.universityStructure;
 import java.time.LocalDate;
 
 public class Student {
-    private String firstName;
-    private String lastName;
-    private String email;
-    private LocalDate   enrollmentDate;
-    private LocalDate   dateOfBirth;
+    private final String firstName;
+    private final String lastName;
+    private final String email;
+    private final LocalDate   enrollmentDate;
+    private final LocalDate   dateOfBirth;
     private boolean graduated;
 
     public Student(String firstName, String lastName, String email, LocalDate dateOfBirth) {

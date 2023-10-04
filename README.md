@@ -5,7 +5,7 @@ Tasks for OOP course
 Requires maven, use `maven package -Dlab=<LAB_NUMBER>`, where `<LAB_NUMBER>` is 0, 1, 2, etc...
 
 ## Lab0
-Created a class in Java that checks whether a integer is narcissistic.
+Created a class in Java that checks whether an integer is narcissistic.
 `maven package -Dlab=0`
 
 ## Lab1

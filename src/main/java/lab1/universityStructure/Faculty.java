@@ -7,17 +7,17 @@ import java.util.Optional;
 import lab1.batch.BatchLoader;
 
 public class Faculty implements Serializable {
-    private String name;
-    private String abbreviation;
-    private ArrayList<Student> students;
-    private StudyField studyField;
+    private final String name;
+    private final String abbreviation;
+    private final ArrayList<Student> students;
+    private final StudyField studyField;
 
     public Faculty(String name, String abbreviation, StudyField studyField) {
         this.name = name;
         this.abbreviation = abbreviation;
         this.studyField = studyField;
 
-        this.students = new ArrayList<Student>();
+        this.students = new ArrayList<>();
     }
 
     public String getName() {
@@ -49,15 +49,15 @@ public class Faculty implements Serializable {
     }
 
     public ArrayList<Student> getStudents(boolean graduated) {
-        ArrayList<Student> result = new ArrayList<Student>();
+        ArrayList<Student> result = new ArrayList<>();
         if (graduated) {
             this.students.stream().
-                filter(student -> student.isGraduated()).
-                forEach(student -> result.add(student));
+                filter(Student::isGraduated).
+                forEach(result::add);
         } else {
             this.students.stream().
                 filter(student -> !student.isGraduated()).
-                forEach(student -> result.add(student));
+                forEach(result::add);
         }
         return result;
     }

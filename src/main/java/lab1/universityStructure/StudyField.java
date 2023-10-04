@@ -8,9 +8,9 @@ public enum StudyField {
     VETERINARY_MEDICINE("Veterinary Medicine");
 
     
-    private String displayName;
+    private final String displayName;
 
-    private StudyField(String displayName) {
+    StudyField(String displayName) {
         this.displayName = displayName;
     }
 

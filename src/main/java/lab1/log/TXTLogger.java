@@ -20,8 +20,8 @@ public class TXTLogger{
     }
 
     // Class definition
-    private PrintWriter writer;
-    private Level level;
+    private final PrintWriter writer;
+    private final Level level;
 
     // TODO custom string
     private TXTLogger(String filepath, Level level) throws IOException{

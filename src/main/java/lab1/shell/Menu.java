@@ -32,7 +32,7 @@ public abstract class Menu {
     // TODO?
     protected void printOptions() {
         this.options.
-        forEach(entry -> System.out.println(entry));
+        forEach(System.out::println);
     }
 
     // Should return true if main loop should continue

@@ -10,7 +10,7 @@ public class University {
 
     // Depends on any session manager, as long as it implements save and load.
     // Makes it easier to change format later.
-    private SessionManager sessionManager;
+    private final SessionManager sessionManager;
 
     public University(SessionManager sessionManager) {
         this.sessionManager = sessionManager;
@@ -19,7 +19,7 @@ public class University {
             this.faculties = this.sessionManager.load();
         } catch (Exception e) {
             // TODO log error
-            this.faculties = new ArrayList<Faculty>();
+            this.faculties = new ArrayList<>();
         }
     }
 
@@ -45,14 +45,14 @@ public class University {
 
     public ArrayList<Faculty> getFaculties() {
         // Copy List to prevent editing
-        return new ArrayList<Faculty>(this.faculties);
+        return new ArrayList<>(this.faculties);
     }
 
     public ArrayList<Faculty> getFaculties(StudyField studyField) {
-        ArrayList<Faculty> result = new ArrayList<Faculty>();
+        ArrayList<Faculty> result = new ArrayList<>();
         this.faculties.stream().
             filter(faculty -> faculty.getStudyField().equals(studyField)).
-            forEach(faculty -> result.add(faculty));
+            forEach(result::add);
         return result;
     }
 

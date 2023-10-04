@@ -10,11 +10,11 @@ import lab1.universityStructure.Student;
 
 public class BatchLoader {
     public static ArrayList<Student> loadNewStudents(String filepath) throws Exception{
-        ArrayList<Student> students = new ArrayList<Student>();
+        ArrayList<Student> students = new ArrayList<>();
 
         FileReader reader = new FileReader(filepath);
         BufferedReader bufReader = new BufferedReader(reader);
-        String studentLine = null;
+        String studentLine;
         
         while ((studentLine = bufReader.readLine()) != null) {   
             // Any amount of spaces after the comma
@@ -34,11 +34,11 @@ public class BatchLoader {
     }
 
     public static ArrayList<String> loadGraduationEmails(String filepath) throws IOException{
-        ArrayList<String> emails = new ArrayList<String>();
+        ArrayList<String> emails = new ArrayList<>();
 
         FileReader reader = new FileReader(filepath);
         BufferedReader bufReader = new BufferedReader(reader);
-        String email = null;
+        String email;
         
         while ((email = bufReader.readLine()) != null) {   
             emails.add(email);

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import lab1.universityStructure.Faculty;
 
 public class BinaryFileManager implements SessionManager{
-    private String filepath;
+    private final String filepath;
 
     public BinaryFileManager(String filepath) {
         this.filepath = filepath;

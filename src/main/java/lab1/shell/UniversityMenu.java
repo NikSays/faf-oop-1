@@ -7,15 +7,15 @@ import lab1.universityStructure.StudyField;
 import lab1.universityStructure.University;
 
 public class UniversityMenu extends Menu {
-    private University university;
-    private HashMap<String, StudyField> studyFieldOptions;
+    private final University university;
+    private final HashMap<String, StudyField> studyFieldOptions;
 
     public UniversityMenu(Scanner scanner, University university) {
         this.scanner = scanner;
         this.university = university;
 
         this.menuPrompt = "University";
-        this.options = new ArrayList<String>(List.of(
+        this.options = new ArrayList<>(List.of(
                 "n - Create a new faculty",
                 "s - Search a student's faculty",
                 "a - Print all faculties",
@@ -71,8 +71,7 @@ public class UniversityMenu extends Menu {
 
     private void printStudyFieldOptions() {
         System.out.println("Available Study Fields:");
-        this.studyFieldOptions.entrySet().
-        forEach(entry -> System.out.println(entry.getKey() + " - " + entry.getValue().getName()));
+        this.studyFieldOptions.forEach((key, value) -> System.out.println(key + " - " + value.getName()));
     }
 
     private void newFaculty() {
