@@ -168,8 +168,7 @@ public class FacultyMenu extends Menu {
                 this.faculty.addStudent(student);
                 TXTLogger.get().Info("Added batch student: " + student.getEmail());
             } catch (Exception e) {
-                System.out.println("Failed to add student " + student.getName() + ": " + e.getMessage());
-                TXTLogger.get().Warn("Failed to batch add student " + student.getEmail() + ": " + e);
+                TXTLogger.get().Warn("Failed to add batch student " + student.getEmail() + ": " + e);
             }
         });
 
@@ -201,8 +200,7 @@ public class FacultyMenu extends Menu {
         students.forEach(email -> {
             Optional<Student> student = this.faculty.findStudent(email);
             if (!student.isPresent()) {
-                System.out.println("Student " + email + " not found");
-                TXTLogger.get().Warn("Failed to batch graduate student " + email + ": not found");
+                TXTLogger.get().Warn("Failed to graduate batch student " + email + ": not found");
                 return;
             }
 

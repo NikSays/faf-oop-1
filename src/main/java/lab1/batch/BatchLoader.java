@@ -24,7 +24,11 @@ public class BatchLoader {
                 continue;
             }
 
-            students.add(new Student(studentValues[0], studentValues[1], studentValues[2], studentValues[3]));
+            try {
+                students.add(new Student(studentValues[0], studentValues[1], studentValues[2], studentValues[3]));
+            } catch (Exception e) {
+                TXTLogger.get().Warn("Failed to create batch student " + studentValues[2] + ": " + e);
+            }
         }
 
         bufReader.close();
