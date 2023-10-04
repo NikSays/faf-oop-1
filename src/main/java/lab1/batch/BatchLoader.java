@@ -20,8 +20,7 @@ public class BatchLoader {
             String[] studentValues = studentLine.split(",\\s*");
             if (studentValues.length != 4) {
                 // TODO log and skip?
-                bufReader.close();
-                throw new Exception("malformed student in file");
+                continue;
             }
 
             students.add(new Student(studentValues[0], studentValues[1], studentValues[2], studentValues[3]));

@@ -1,5 +1,6 @@
 package lab1.shell;
 
+import lab1.batch.BatchLoader;
 import lab1.universityStructure.Faculty;
 import lab1.universityStructure.Student;
 import lab1.universityStructure.University;
@@ -22,6 +23,8 @@ public class FacultyMenu extends Menu {
                 "dc - Display current students",
                 "dg - Display graduated students",
                 "i  - Is a student in the faculty",
+                "ba - Batch add students",
+                "bg - Batch graduate students",
                 "q  - Quit the faculty"));
     }
 
@@ -42,6 +45,12 @@ public class FacultyMenu extends Menu {
             case "i":
                 // TODO toString
                 this.isStudent();
+                break;
+            case "ba":
+                this.batchAdd();
+                break;
+            case "bg":
+                this.batchGraduate();
                 break;
             case "q":
                 System.out.println("Exiting faculty...");
@@ -90,13 +99,13 @@ public class FacultyMenu extends Menu {
         System.out.println();
 
         Optional<Student> student = this.faculty.findStudent(email);
-        if (student.isPresent()) {
-            student.get().graduate();
-            System.out.println("Student successfully graduated");
-        } else {
+        if (!student.isPresent()) {
             System.out.println("Student not found");
             return;
         }
+
+        student.get().graduate();
+        System.out.println("Student successfully graduated");
 
         try {
             this.university.saveSession();
@@ -131,6 +140,69 @@ public class FacultyMenu extends Menu {
             System.out.println(student.get());
         } else {
             System.out.println("No such student");
+        }
+    }
+
+    private void batchAdd() {
+        this.printPrompt("Input filename");
+        String filepath = this.scanner.nextLine();
+
+        System.out.println();
+
+        ArrayList<Student> students;
+        try {
+            students = BatchLoader.loadNewStudents(filepath);
+        } catch (Exception e) {
+            System.out.println("Failed to load file: " + e.getMessage());
+            return;
+        }
+        students.forEach(student -> {
+            try {
+                this.faculty.addStudent(student);
+            } catch (Exception e) {
+                System.out.println("Failed to add student " + student.getName() + ": " + e.getMessage());
+            }
+        });
+
+        System.out.println("Successfully added students");
+
+        try {
+            this.university.saveSession();
+        } catch (Exception e) {
+            System.out.println("Failed to save state to disk. See logs");
+        }
+    }
+
+    private void batchGraduate() {
+        this.printPrompt("Input filename");
+        String filepath = this.scanner.nextLine();
+
+        System.out.println();
+
+        ArrayList<String> students;
+        try {
+            students = BatchLoader.loadGraduationEmails(filepath);
+        } catch (Exception e) {
+            System.out.println("Failed to load file " + e.getMessage());
+            return;
+        }
+
+        students.forEach(email -> {
+            Optional<Student> student = this.faculty.findStudent(email);
+            if (!student.isPresent()) {
+                System.out.println("Student " + email + " not found");
+                return;
+            }
+            student.get().graduate();
+
+        });
+
+        System.out.println("Successfully graduated students");
+
+        try {
+            this.university.saveSession();
+        } catch (Exception e) {
+            System.out.println("Failed to save state to disk. See logs");
         }
     }
 }

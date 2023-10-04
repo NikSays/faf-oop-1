@@ -46,7 +46,7 @@ public class Faculty implements Serializable {
         boolean exists = this.students.stream().
                 anyMatch(student -> student.getEmail().equals(newStudent.getEmail()));
         if (exists) {
-            throw new Exception("faculty exists");
+            throw new Exception("student exists");
         }
 
         this.students.add(newStudent);
@@ -70,23 +70,6 @@ public class Faculty implements Serializable {
                     forEach(result::add);
         }
         return result;
-    }
-
-    public void batchAddStudents(String filepath) throws Exception {
-        BatchLoader.loadNewStudents(filepath).
-                forEach(student -> {
-                    try {
-                        this.addStudent(student);
-                    } catch (Exception e) {
-                        // TODO LOG
-                    }
-                });
-    }
-
-    public void batchGraduateStudents(String filepath) throws Exception {
-        // TODO what if does not exist
-        BatchLoader.loadGraduationEmails(filepath).
-                forEach(student -> this.findStudent(student).get().graduate());
     }
 
     public String toString() {

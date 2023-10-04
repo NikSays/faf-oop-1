@@ -35,7 +35,7 @@ public class Student implements Serializable {
     }
 
     public String getName() {
-        return this.lastName + this.firstName;
+        return this.firstName + " " + this.lastName;
     }
 
     public String getEmail() {
