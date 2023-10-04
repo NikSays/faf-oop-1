@@ -22,7 +22,7 @@ public abstract class Menu {
     }
 
     protected void printPrompt(String prompt) {
-        System.out.print(prompt + "> ");
+        System.out.print("\n" + prompt + "> ");
     }
 
     protected void printInvalid() {

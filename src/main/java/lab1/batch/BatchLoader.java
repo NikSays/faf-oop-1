@@ -3,7 +3,6 @@ package lab1.batch;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import lab1.universityStructure.Student;
@@ -25,8 +24,7 @@ public class BatchLoader {
                 throw new Exception("malformed student in file");
             }
             
-            LocalDate dateOfBirth = LocalDate.parse(studentValues[3]);
-            students.add(new Student(studentValues[0], studentValues[1], studentValues[2], dateOfBirth));
+            students.add(new Student(studentValues[0], studentValues[1], studentValues[2], studentValues[3]));
         } 
 
         bufReader.close();

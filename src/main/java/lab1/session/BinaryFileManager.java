@@ -17,10 +17,10 @@ public class BinaryFileManager implements SessionManager{
     }
 
     @Override
-    public void save(ArrayList<Faculty> faculties) throws IOException{
+    public void save(ArrayList<Faculty> faculties) throws IOException {
         FileOutputStream writeData = new FileOutputStream(filepath);
         ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
-    
+
         writeStream.writeObject(faculties);
         writeStream.flush();
         writeStream.close();

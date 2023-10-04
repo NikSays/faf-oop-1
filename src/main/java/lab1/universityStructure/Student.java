@@ -1,22 +1,23 @@
 package lab1.universityStructure;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Student {
+public class Student implements Serializable {
     private final String firstName;
     private final String lastName;
     private final String email;
-    private final LocalDate   enrollmentDate;
-    private final LocalDate   dateOfBirth;
+    private final String   enrollmentDate;
+    private final String   dateOfBirth;
     private boolean graduated;
 
-    public Student(String firstName, String lastName, String email, LocalDate dateOfBirth) {
+    public Student(String firstName, String lastName, String email, String dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         
-        this.enrollmentDate = LocalDate.now();
+        this.enrollmentDate = LocalDate.now().toString();
         this.graduated = false;
     }
 
@@ -28,11 +29,11 @@ public class Student {
         return this.email;
     }
 
-    public LocalDate getEnrollmentDate() {
+    public String getEnrollmentDate() {
         return this.enrollmentDate;
     }
 
-    public LocalDate getDateOfBirth() {
+    public String getDateOfBirth() {
         return this.dateOfBirth;
     }
 
