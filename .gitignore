@@ -2,7 +2,7 @@
 !*.java
 !pom.xml
 
-!.gitignore
+!/.gitignore
 !README.MD
 
 !*/
