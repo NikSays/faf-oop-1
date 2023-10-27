@@ -22,7 +22,7 @@ public abstract class Menu {
             this.printPrompt(this.menuPrompt);
             String choice = this.scanner.nextLine();
             System.out.println();
-            continueLoop = this.handleChoice(choice);
+            continueLoop = this.handleInput(choice);
 
             System.out.println();
             if (continueLoop) {
@@ -46,5 +46,5 @@ public abstract class Menu {
     }
 
     // Should return true if main loop should continue
-    protected abstract boolean handleChoice(String choice);
+    protected abstract boolean handleInput(String input);
 }
