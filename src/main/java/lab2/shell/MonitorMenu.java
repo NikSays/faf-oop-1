@@ -2,6 +2,7 @@ package lab2.shell;
 
 
 import lab2.fileInfo.FileInfo;
+import lab2.fileInfo.ImageInfo;
 import lab2.session.Session;
 import lab2.fileInfo.TXTInfo;
 
@@ -115,6 +116,10 @@ public class MonitorMenu extends Menu {
     private FileInfo getInfoByExtension(File file) throws IOException {
         if (file.getName().endsWith(".txt")) {
             return new TXTInfo(file);
+        } else if (file.getName().endsWith(".jpeg") ||
+                file.getName().endsWith(".jpg") ||
+                file.getName().endsWith(".png")) {
+            return new ImageInfo(file);
         } else {
             return new FileInfo(file);
         }
