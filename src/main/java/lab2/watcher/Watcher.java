@@ -23,6 +23,7 @@ public class Watcher extends Thread {
         FileSystem fs = file.toPath().getFileSystem();
         try (WatchService service = fs.newWatchService()) {
             file.toPath().register(service, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE);
+            String lastCreated = "";
             WatchKey key = null;
             do {
                 key = service.take();
@@ -30,14 +31,20 @@ public class Watcher extends Thread {
                 WatchEvent.Kind<?> kind = null;
                 for (WatchEvent<?> watchEvent : key.pollEvents()) {
                     kind = watchEvent.kind();
+                    String triggeredBy = ((WatchEvent<Path>) watchEvent).context().toString();
+                    if (triggeredBy.startsWith(".")) {
+                        continue;
+                    }
                     if (ENTRY_CREATE == kind) {
-                        Path triggeredBy = ((WatchEvent<Path>) watchEvent).context();
+                        lastCreated = triggeredBy;
                         System.out.println("CREATED  - " + triggeredBy);
                     } else if (ENTRY_MODIFY == kind) {
-                        Path triggeredBy = ((WatchEvent<Path>) watchEvent).context();
-                        System.out.println("MODIFIED - " + triggeredBy);
+                        if (triggeredBy.equals(lastCreated)) {
+                            lastCreated = "";
+                        } else {
+                            System.out.println("MODIFIED - " + triggeredBy);
+                        }
                     } else if (ENTRY_DELETE == kind) {
-                        Path triggeredBy = ((WatchEvent<Path>) watchEvent).context();
                         System.out.println("DELETED  - " + triggeredBy);
                     }
                 }

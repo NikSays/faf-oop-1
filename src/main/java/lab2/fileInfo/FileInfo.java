@@ -3,6 +3,8 @@ package lab2.fileInfo;
 import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
 
 public class FileInfo {
@@ -23,9 +25,10 @@ public class FileInfo {
             ext = nameParts[nameParts.length - 1].toUpperCase();
         }
 
+        ZoneOffset offset = ZoneOffset.systemDefault().getRules().getOffset(Instant.now());
         System.out.printf("Filename:  %s\n", name);
         System.out.printf("Extension: %s\n", ext);
-        System.out.printf("Modified:  %s\n", Instant.ofEpochMilli(this.file.lastModified()));
+        System.out.printf("Modified:  %s\n", LocalDateTime.ofEpochSecond(this.file.lastModified() / 1000, 0, offset));
     }
 
     public void printExtra() {
