@@ -3,6 +3,7 @@ package lab2.shell;
 
 import lab2.fileInfo.FileInfo;
 import lab2.session.Session;
+import lab2.fileInfo.TXTInfo;
 
 import java.io.File;
 import java.io.IOException;
@@ -112,7 +113,11 @@ public class MonitorMenu extends Menu {
     }
 
     private FileInfo getInfoByExtension(File file) throws IOException {
-        return new FileInfo(file);
+        if (file.getName().endsWith(".txt")) {
+            return new TXTInfo(file);
+        } else {
+            return new FileInfo(file);
+        }
     }
 
     private void printStatus() {
