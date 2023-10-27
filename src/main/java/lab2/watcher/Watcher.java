@@ -32,7 +32,7 @@ public class Watcher extends Thread {
                 for (WatchEvent<?> watchEvent : key.pollEvents()) {
                     kind = watchEvent.kind();
                     String triggeredBy = ((WatchEvent<Path>) watchEvent).context().toString();
-                    if (triggeredBy.startsWith(".")) {
+                    if (triggeredBy.startsWith(".") || triggeredBy.endsWith("~")) {
                         continue;
                     }
                     if (ENTRY_CREATE == kind) {

@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String directory = "./resources/lab2";
+        String directory = "./resources/lab2/";
         try {
             Session.load();
         } catch (IOException e) {

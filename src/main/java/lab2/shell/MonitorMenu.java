@@ -3,8 +3,9 @@ package lab2.shell;
 
 import lab2.fileInfo.FileInfo;
 import lab2.fileInfo.ImageInfo;
-import lab2.session.Session;
 import lab2.fileInfo.TXTInfo;
+import lab2.session.Session;
+import lab2.fileInfo.CodeInfo;
 
 import java.io.File;
 import java.io.IOException;
@@ -117,15 +118,17 @@ public class MonitorMenu extends Menu {
     }
 
     private FileInfo getInfoByExtension(File file) throws IOException {
-        if (file.getName().endsWith(".txt")) {
-            return new TXTInfo(file);
-        } else if (file.getName().endsWith(".jpeg") ||
-                file.getName().endsWith(".jpg") ||
-                file.getName().endsWith(".png")) {
-            return new ImageInfo(file);
-        } else {
-            return new FileInfo(file);
+        String[] nameParts = file.getName().split("\\.");
+        String ext = "";
+        if (nameParts.length > 1) {
+            ext = nameParts[nameParts.length - 1].toLowerCase();
         }
+        return switch (ext) {
+            case "txt" -> new TXTInfo(file);
+            case "jpeg", "jpg", "png" -> new ImageInfo(file);
+            case "py", "java", "cpp" -> new CodeInfo(file);
+            default -> new FileInfo(file);
+        };
     }
 
     private void printStatus() {

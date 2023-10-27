@@ -3,16 +3,16 @@ package lab2.fileInfo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
-public class TXTInfo extends FileInfo {
-    public TXTInfo(File file) {
+public class CodeInfo extends FileInfo {
+    public CodeInfo(File file) {
         super(file);
     }
 
     @Override
     public void printExtra() {
-        int charsCount = 0;
-        int wordsCount = 0;
+        int classCount = 0;
         int linesCount = 0;
 
         Scanner sc;
@@ -25,16 +25,13 @@ public class TXTInfo extends FileInfo {
 
         while (sc.hasNext()) {
             String tmpStr = sc.nextLine();
-            if (!tmpStr.isEmpty()) {
-                charsCount += tmpStr.length();
-                wordsCount += tmpStr.split(" ").length;
+            if (tmpStr.matches("^(private |public |protected )?class.+")) {
+                ++classCount;
             }
             ++linesCount;
         }
 
-        //display the count of characters, words, and lines
-        System.out.println("Number of characters: " + charsCount);
-        System.out.println("Number of words:      " + wordsCount);
+        System.out.println("Number of classes:    " + classCount);
         System.out.println("Number of lines:      " + linesCount);
     }
 }
