@@ -28,6 +28,21 @@ Session state is stored in `.session`
 
 Logs are stored in `lab1.log`
 
+
+## Lab2
+
+An interactive shell for monitoring file changes.
+
+```bash
+mvn package -Dlab=2 && java -jar ./target/lab2.jar
+```
+
+Monitors `./resources/lab2`
+
+Stores state between restarts in `.lab2session`
+
+Uses FileSystem events to catch changes in separate thread
+
 ---
 
 FAF-221, Nejintev Nicolai
