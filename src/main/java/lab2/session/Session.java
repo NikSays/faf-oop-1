@@ -12,10 +12,8 @@ public class Session implements Serializable {
     public static volatile ArrayList<String> committedFilenames;
     private static final String filepath = ".lab2session";
 
-    // ewwww
-    public static final ZoneOffset offset = ZoneOffset.systemDefault().getRules().getOffset(Instant.now());
-
     public static void save() throws IOException {
+        ZoneOffset offset = ZoneOffset.systemDefault().getRules().getOffset(Instant.now());
         BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
 
         long lastCommitEpoch = lastCommit.toEpochSecond(offset);
@@ -28,6 +26,7 @@ public class Session implements Serializable {
     }
 
     public static void load() throws IOException {
+        ZoneOffset offset = ZoneOffset.systemDefault().getRules().getOffset(Instant.now());
         BufferedReader reader = new BufferedReader(new FileReader(filepath));
 
         String epochString = reader.readLine();

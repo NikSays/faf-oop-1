@@ -8,7 +8,9 @@ import lab2.fileInfo.TXTInfo;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -134,7 +136,8 @@ public class MonitorMenu extends Menu {
         }
         System.out.printf("Last commit: %s\n", Session.lastCommit.truncatedTo(ChronoUnit.SECONDS));
 
-        long lastCommitMillis = Session.lastCommit.toInstant(Session.offset).toEpochMilli();
+        ZoneOffset offset = ZoneOffset.systemDefault().getRules().getOffset(Instant.now());
+        long lastCommitMillis = Session.lastCommit.toInstant(offset).toEpochMilli();
         List<String> newFilenames = Arrays.stream(files).map(File::getName).toList();
 
         for (File file : files) {
