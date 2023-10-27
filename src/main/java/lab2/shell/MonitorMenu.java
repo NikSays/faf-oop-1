@@ -29,8 +29,7 @@ public class MonitorMenu extends Menu {
         this.options = new ArrayList<>(List.of(
                 "commit      - apply current changes",
                 "info <file> - print info about a file",
-                "status      - print current changes",
-                "quit        - exit the program"));
+                "status      - print current changes"));
     }
 
     protected boolean handleInput(String input) {
@@ -50,9 +49,6 @@ public class MonitorMenu extends Menu {
             case "status":
                 this.printStatus();
                 break;
-            case "quit":
-                System.out.println("Exiting...");
-                return false;
             default:
                 this.printInvalid();
         }
