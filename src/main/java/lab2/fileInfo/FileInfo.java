@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class FileInfo {
     protected final File file;
 
-    public FileInfo(File file) throws IOException {
+    public FileInfo(File file) {
         this.file = file;
     }
 

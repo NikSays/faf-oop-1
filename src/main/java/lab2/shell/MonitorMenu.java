@@ -18,8 +18,6 @@ import java.util.Scanner;
 
 public class MonitorMenu extends Menu {
     private final String directory;
-    // Need university to save global state on faculty changes
-
 
     public MonitorMenu(Scanner scanner, String directory) {
         this.menuPrompt = "menu";
@@ -41,10 +39,6 @@ public class MonitorMenu extends Menu {
             case "info":
                 if (args.length == 2) {
                     File f = new File(this.directory + args[1]);
-                    if (!f.exists()) {
-                        System.out.println("No such file.");
-                        break;
-                    }
                     this.printInfo(f);
                 } else {
                     this.printInfo();
@@ -67,6 +61,7 @@ public class MonitorMenu extends Menu {
             Session.save();
         } catch (Exception e) {
             System.out.println("Failed to save state to disk.");
+            e.printStackTrace();
         }
     }
 
@@ -91,7 +86,7 @@ public class MonitorMenu extends Menu {
     private void printInfo() {
         File[] files = new File(this.directory).listFiles();
         if (files == null) {
-            System.out.println("Not looking in a directory");
+            System.out.println("Error: " + this.directory + " is not a directory");
             return;
         }
 
@@ -102,11 +97,16 @@ public class MonitorMenu extends Menu {
     }
 
     private void printInfo(File file) {
+        if (!file.exists()) {
+            System.out.println("No such file.");
+            return;
+        }
         FileInfo fi;
         try {
             fi = this.getInfoByExtension(file);
         } catch (IOException e) {
-            System.out.println("Failed to get attributes.");
+            System.out.println("Failed to get info.");
+            e.printStackTrace();
             return;
         }
         fi.printBasic();
@@ -129,7 +129,7 @@ public class MonitorMenu extends Menu {
     private void printStatus() {
         File[] files = new File(this.directory).listFiles();
         if (files == null) {
-            System.out.println("Not looking in a directory");
+            System.out.println("Error: " + this.directory + " is not a directory");
             return;
         }
         System.out.printf("Last commit: %s\n", Session.lastCommit.truncatedTo(ChronoUnit.SECONDS));

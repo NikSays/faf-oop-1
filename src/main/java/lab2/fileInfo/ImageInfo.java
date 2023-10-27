@@ -10,14 +10,14 @@ import java.io.IOException;
 import java.util.Iterator;
 
 public class ImageInfo extends FileInfo {
-    public ImageInfo(File file) throws IOException {
+    public ImageInfo(File file) {
         super(file);
     }
 
     @Override
     public void printExtra() {
         Dimension dim = null;
-        try(ImageInputStream in = ImageIO.createImageInputStream(this.file)){
+        try (ImageInputStream in = ImageIO.createImageInputStream(this.file)) {
             final Iterator<ImageReader> readers = ImageIO.getImageReaders(in);
             if (readers.hasNext()) {
                 ImageReader reader = readers.next();

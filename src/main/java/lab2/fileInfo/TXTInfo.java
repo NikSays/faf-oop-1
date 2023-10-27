@@ -20,7 +20,8 @@ public class TXTInfo extends FileInfo {
         try {
             sc = new Scanner(this.file);
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e); //ew
+            System.out.println("File not found");
+            return;
         }
 
         while (sc.hasNext()) {
