@@ -16,7 +16,7 @@ public class Main {
             Session.load();
         } catch (IOException e) {
             Session.lastCommit = LocalDateTime.now();
-            Session.existingFiles = new ArrayList<>();
+            Session.committedFilenames = new ArrayList<>();
         }
         MonitorMenu shell = new MonitorMenu(
                 new Scanner(System.in)

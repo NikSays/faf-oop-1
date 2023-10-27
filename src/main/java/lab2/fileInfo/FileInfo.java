@@ -5,6 +5,7 @@ import lab2.session.Session;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -28,7 +29,7 @@ public class FileInfo {
 
         System.out.printf("Filename:  %s\n", name);
         System.out.printf("Extension: %s\n", ext);
-        System.out.printf("Modified:  %s\n", LocalDateTime.ofEpochSecond(this.file.lastModified()/1000, 0, Session.offset));
+        System.out.printf("Modified:  %s\n", Instant.ofEpochMilli(this.file.lastModified()));
     }
 
     public void printExtra() {

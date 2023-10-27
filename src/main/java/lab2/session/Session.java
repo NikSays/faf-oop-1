@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class Session implements Serializable {
     public static volatile LocalDateTime lastCommit;
-    public static volatile ArrayList<String> existingFiles;
+    public static volatile ArrayList<String> committedFilenames;
     private static final String filepath = ".lab2session";
 
     // ewwww
@@ -22,7 +22,7 @@ public class Session implements Serializable {
         writer.write(String.format("%d\n", lastCommitEpoch));
 
         // slash can't be in filename, so can be used as delimiter
-        writer.write(String.join("/", existingFiles));
+        writer.write(String.join("/", committedFilenames));
 
         writer.close();
     }
@@ -35,6 +35,6 @@ public class Session implements Serializable {
         lastCommit = LocalDateTime.ofEpochSecond(epoch, 0, offset);
 
         String existingFilesStr = reader.readLine();
-        existingFiles = new ArrayList<>(Arrays.asList(existingFilesStr.split("/")));
+        committedFilenames = new ArrayList<>(Arrays.asList(existingFilesStr.split("/")));
     }
 }

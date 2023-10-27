@@ -82,7 +82,7 @@ public class MonitorMenu extends Menu {
         }
 
         Session.lastCommit = LocalDateTime.now();
-        Session.existingFiles = existingFiles;
+        Session.committedFilenames = existingFiles;
         this.safeSaveState();
         System.out.println("Committed changes.");
     }
@@ -137,13 +137,13 @@ public class MonitorMenu extends Menu {
         List<String> newFilenames = Arrays.stream(files).map(File::getName).toList();
 
         for (File file : files) {
-            if (!Session.existingFiles.contains(file.getName())) {
+            if (!Session.committedFilenames.contains(file.getName())) {
                 System.out.printf("CREATED  - %s\n", file.getName());
             } else if (file.lastModified() > lastCommitMillis) {
                 System.out.printf("MODIFIED - %s\n", file.getName());
             }
         }
-        for (String name : Session.existingFiles) {
+        for (String name : Session.committedFilenames) {
             if (!newFilenames.contains(name)) {
                 System.out.printf("DELETED  - %s\n", name);
             }
