@@ -17,13 +17,14 @@ import java.util.Scanner;
 
 
 public class MonitorMenu extends Menu {
-    private final String directory = "./resources/lab2/";
+    private final String directory;
     // Need university to save global state on faculty changes
 
 
-    public MonitorMenu(Scanner scanner) {
+    public MonitorMenu(Scanner scanner, String directory) {
         this.menuPrompt = "menu";
         this.scanner = scanner;
+        this.directory = directory;
         this.options = new ArrayList<>(List.of(
                 "commit      - apply current changes",
                 "info <file> - print info about a file",

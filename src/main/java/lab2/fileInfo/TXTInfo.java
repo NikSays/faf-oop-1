@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class TXTInfo extends FileInfo {
-    public TXTInfo (File file) throws IOException {
+    public TXTInfo(File file) throws IOException {
         super(file);
     }
 

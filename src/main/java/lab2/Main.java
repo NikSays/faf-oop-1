@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) {
+        String directory = "./resources/lab2";
         try {
             Session.load();
         } catch (IOException e) {
@@ -28,7 +29,8 @@ public class Main {
         executor.scheduleAtFixedRate(new Watcher(), 1, 1, TimeUnit.SECONDS);
 
         MonitorMenu shell = new MonitorMenu(
-                new Scanner(System.in)
+                new Scanner(System.in),
+                directory
         );
 
         shell.run();

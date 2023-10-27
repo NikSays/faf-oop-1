@@ -1,12 +1,8 @@
 package lab2.fileInfo;
 
-import lab2.session.Session;
-
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public class FileInfo {
