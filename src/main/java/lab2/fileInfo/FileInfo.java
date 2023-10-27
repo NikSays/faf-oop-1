@@ -1,7 +1,6 @@
 package lab2.fileInfo;
 
 import java.io.File;
-import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

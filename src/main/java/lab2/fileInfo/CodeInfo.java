@@ -3,7 +3,6 @@ package lab2.fileInfo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class CodeInfo extends FileInfo {
     public CodeInfo(File file) {

@@ -1,12 +1,10 @@
 package lab2.fileInfo;
 
-
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.Iterator;
 
 public class ImageInfo extends FileInfo {

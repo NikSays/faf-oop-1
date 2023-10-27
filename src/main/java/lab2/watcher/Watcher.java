@@ -24,11 +24,11 @@ public class Watcher extends Thread {
         try (WatchService service = fs.newWatchService()) {
             file.toPath().register(service, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE);
             String lastCreated = "";
-            WatchKey key = null;
+            WatchKey key;
             do {
                 key = service.take();
 
-                WatchEvent.Kind<?> kind = null;
+                WatchEvent.Kind<?> kind;
                 for (WatchEvent<?> watchEvent : key.pollEvents()) {
                     kind = watchEvent.kind();
                     String triggeredBy = ((WatchEvent<Path>) watchEvent).context().toString();
