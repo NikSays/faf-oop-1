@@ -35,9 +35,9 @@ public class SelectionMenu extends Menu {
             case "ql":
                 new QueueMenu(this.scanner, new QueueLinkedList<>(), "Queue Linked List").run();
             case "su":
-                new StackMenu(this.scanner, new StackArrayUp<>(), "Stack Array Up").run();
+                new StackMenu(this.scanner, new StackArrayUp<>(5), "Stack Array Up").run();
             case "sd":
-                new StackMenu(this.scanner, new StackArrayDown<>(), "Stack Array Down").run();
+                new StackMenu(this.scanner, new StackArrayDown<>(5), "Stack Array Down").run();
             case "sl":
                 new StackMenu(this.scanner, new StackLinkedList<>(), "Stack Linked List").run();
             default:
