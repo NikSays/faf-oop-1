@@ -11,16 +11,17 @@ public class QueueMenu extends Menu {
     // Need university to save global state on faculty changes
     Queue<String> queue;
 
-    public QueueMenu(Scanner scanner, Queue<String> queue, String name) {
+    public QueueMenu(Scanner scanner, Queue<String> queue, String prompt) {
         this.scanner = scanner;
         this.queue = queue;
 
-        this.menuPrompt = "Faculty " + name;
+        this.menuPrompt = prompt;
         this.options = new ArrayList<>(List.of(
-                "enq  - enqueue element",
-                "deq  - dequeue element",
-                "peek - show first without dequeue",
-                "info - is empty or full"));
+                "enq  - Enqueue element",
+                "deq  - Dequeue element",
+                "peek - Show first without dequeue",
+                "info - Is empty or full",
+                "exit - Try a different data structure"));
     }
 
     protected boolean handleChoice(String input) {

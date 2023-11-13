@@ -11,16 +11,17 @@ public class StackMenu extends Menu {
     // Need university to save global state on faculty changes
     Stack<String> stack;
 
-    public StackMenu(Scanner scanner, Stack<String> stack, String name) {
+    public StackMenu(Scanner scanner, Stack<String> stack, String prompt) {
         this.scanner = scanner;
         this.stack = stack;
 
-        this.menuPrompt = "Faculty " + name;
+        this.menuPrompt = prompt;
         this.options = new ArrayList<>(List.of(
-                "push - push element",
-                "pop  - pop element",
-                "peek - show first without pop",
-                "info - is empty or full"));
+                "push - Push element",
+                "pop  - Pop element",
+                "peek - Show first without pop",
+                "info - Is empty or full",
+                "exit - Try a different data structure"));
     }
 
     protected boolean handleChoice(String input) {
