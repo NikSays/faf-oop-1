@@ -1,11 +1,11 @@
 package lab3.queue;
 
-public interface Queue {
-    void enqueue(String item);
+public interface Queue<T> {
+    void enqueue(T item);
 
-    String dequeue();
+    T dequeue();
 
-    String peek();
+    T peek();
 
     boolean isEmpty();
 

@@ -1,11 +1,11 @@
 package lab3.stack;
 
-public interface Stack {
-    void push(String item);
+public interface Stack<T> {
+    void push(T item);
 
-    String pop();
+    T pop();
 
-    String peek();
+    T peek();
 
     boolean isEmpty();
 
