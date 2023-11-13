@@ -55,7 +55,7 @@ public class QueueMenu extends Menu {
             this.queue.enqueue(item);
             System.out.println("Enqueued: " + item);
         } catch (IllegalStateException e) {
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -63,7 +63,7 @@ public class QueueMenu extends Menu {
         try {
             System.out.println("Dequeued: " + this.queue.dequeue());
         } catch (IllegalStateException e) {
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -71,7 +71,7 @@ public class QueueMenu extends Menu {
         try {
             System.out.println("Peeked: " + this.queue.peek());
         } catch (IllegalStateException e) {
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
         }
     }
 

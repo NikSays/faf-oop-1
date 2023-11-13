@@ -55,7 +55,7 @@ public class StackMenu extends Menu {
             this.stack.push(item);
             System.out.println("Pushed: " + item);
         } catch (IllegalStateException e) {
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -63,7 +63,7 @@ public class StackMenu extends Menu {
         try {
             System.out.println("Popped: " + this.stack.pop());
         } catch (IllegalStateException e) {
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -71,7 +71,7 @@ public class StackMenu extends Menu {
         try {
             System.out.println("Peeked: " + this.stack.peek());
         } catch (IllegalStateException e) {
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
         }
     }
 
