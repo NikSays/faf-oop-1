@@ -80,6 +80,8 @@ public class QueueMenu extends Menu {
             System.out.println("Empty");
         } else if (this.queue.isFull()) {
             System.out.println("Full");
+        } else {
+            System.out.println("Nothing interesting");
         }
     }
 }

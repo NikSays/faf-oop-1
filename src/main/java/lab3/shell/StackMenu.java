@@ -80,6 +80,8 @@ public class StackMenu extends Menu {
             System.out.println("Empty");
         } else if (this.stack.isFull()) {
             System.out.println("Full");
+        } else {
+            System.out.println("Nothing interesting");
         }
     }
 }
