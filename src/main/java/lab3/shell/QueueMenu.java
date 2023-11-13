@@ -32,17 +32,14 @@ public class QueueMenu extends Menu {
                     break;
                 }
                 this.enqueue(args[1]);
-                System.out.println("Enqueued");
                 break;
             }
             case "deq": {
-                String item = this.dequeue();
-                System.out.println("Dequeued: " + item);
+                this.dequeue();
                 break;
             }
             case "peek": {
-                String item = this.peek();
-                System.out.println("Peeked: " + item);
+                this.peek();
                 break;
             }
             case "info": {
@@ -56,15 +53,28 @@ public class QueueMenu extends Menu {
     }
 
     private void enqueue(String item) {
-        this.queue.enqueue(item);
+        try {
+            this.queue.enqueue(item);
+            System.out.println("Enqueued");
+        } catch (IllegalStateException e) {
+            System.out.println(e.toString());
+        }
     }
 
-    private String dequeue() {
-        return this.queue.dequeue();
+    private void dequeue() {
+        try {
+            System.out.println("Dequeued: " + this.queue.dequeue());
+        } catch (IllegalStateException e) {
+            System.out.println(e.toString());
+        }
     }
 
-    private String peek() {
-        return this.queue.peek();
+    private void peek() {
+        try {
+            this.queue.peek();
+        } catch (IllegalStateException e) {
+            System.out.println(e.toString());
+        }
     }
 
     private void info() {

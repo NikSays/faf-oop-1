@@ -1,6 +1,6 @@
 package lab3.dataStructures.stack;
 
-public class StackLinkedList<T> implements Stack<T>{
+public class StackLinkedList<T> implements Stack<T> {
     @Override
     public void push(T item) {
 

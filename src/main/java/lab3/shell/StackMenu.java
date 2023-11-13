@@ -32,17 +32,14 @@ public class StackMenu extends Menu {
                     break;
                 }
                 this.push(args[1]);
-                System.out.println("Pushed");
                 break;
             }
             case "pop": {
-                String item = this.pop();
-                System.out.println("Popped: " + item);
+                this.pop();
                 break;
             }
             case "peek": {
-                String item = this.peek();
-                System.out.println("Peeked: " + item);
+                this.peek();
                 break;
             }
             case "info": {
@@ -56,15 +53,28 @@ public class StackMenu extends Menu {
     }
 
     private void push(String item) {
-        this.stack.push(item);
+        try {
+            this.stack.push(item);
+            System.out.println("Pushed");
+        } catch (IllegalStateException e) {
+            System.out.println(e.toString());
+        }
     }
 
-    private String pop() {
-        return this.stack.pop();
+    private void pop() {
+        try {
+            System.out.println("Popped: " + this.stack.pop());
+        } catch (IllegalStateException e) {
+            System.out.println(e.toString());
+        }
     }
 
-    private String peek() {
-        return this.stack.peek();
+    private void peek() {
+        try {
+            System.out.println("Peeked: " + this.stack.peek());
+        } catch (IllegalStateException e) {
+            System.out.println(e.toString());
+        }
     }
 
     private void info() {

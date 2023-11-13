@@ -1,11 +1,11 @@
 package lab3.dataStructures.queue;
 
 public interface Queue<T> {
-    void enqueue(T item);
+    void enqueue(T item) throws IllegalStateException;
 
-    T dequeue();
+    T dequeue() throws IllegalStateException;
 
-    T peek();
+    T peek() throws IllegalStateException;
 
     boolean isEmpty();
 
