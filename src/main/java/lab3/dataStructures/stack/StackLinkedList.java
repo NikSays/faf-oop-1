@@ -32,6 +32,7 @@ public class StackLinkedList<T> implements Stack<T> {
     public T pop() {
         if (this.isEmpty())
             throw new IllegalStateException("Stack is empty");
+
         T item = this.head.data;
         this.head = this.head.next;
         return item;
@@ -41,6 +42,7 @@ public class StackLinkedList<T> implements Stack<T> {
     public T peek() {
         if (this.isEmpty())
             throw new IllegalStateException("Stack is empty");
+
         return this.head.data;
     }
 

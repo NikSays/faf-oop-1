@@ -9,47 +9,52 @@ public class StackArrayUp<T> implements Stack<T> {
 
     public StackArrayUp(int size) {
         this.size = size;
-        this.arr = new ArrayList<T>();
         this.top = -1;
+        this.arr = new ArrayList<>();
+        for (int i = 0; i < this.size; i++) {
+            this.arr.add(null);
+        }
     }
 
     @Override
     public void push(T item) {
-        if (!this.isFull()) {
-            this.top++;
-            this.arr.set(this.top, item);
-        } else {
-            throw new IllegalStateException("stack is full");
-        }
+        if (this.isFull())
+            throw new IllegalStateException("Stack is full");
+
+        this.top++;
+        this.arr.set(this.top, item);
+
+        System.out.println(this.arr);
     }
 
     @Override
     public T pop() {
-        if (!this.isEmpty()) {
-            int index = this.top;
-            this.top--;
-            return this.arr.get(index);
-        } else {
-            throw new IllegalStateException("stack is empty");
-        }
+        if (this.isEmpty())
+            throw new IllegalStateException("Stack is empty");
+
+        int index = this.top;
+        this.top--;
+
+        System.out.println(this.arr);
+        return this.arr.get(index);
+
     }
 
     @Override
     public T peek() {
-        if (!this.isEmpty())
-            return this.arr.get(this.top);
-        else {
-            throw new IllegalStateException("stack is empty");
-        }
+        if (this.isEmpty())
+            throw new IllegalStateException("Stack is empty");
+
+        return this.arr.get(this.top);
     }
 
     @Override
     public boolean isEmpty() {
-        return (this.top == -1);
+        return this.top == -1;
     }
 
     @Override
     public boolean isFull() {
-        return (this.top == this.size - 1);
+        return this.top == this.size - 1;
     }
 }
