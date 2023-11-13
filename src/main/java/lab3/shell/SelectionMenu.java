@@ -29,17 +29,23 @@ public class SelectionMenu extends Menu {
     protected boolean handleChoice(String choice) {
         switch (choice) {
             case "qu":
-                new QueueMenu(this.scanner, new QueueArrayUp<>(), "Queue Array Up").run();
+                new QueueMenu(this.scanner, new QueueArrayUp<>(2), "Queue Array Up").run();
+                break;
             case "qd":
-                new QueueMenu(this.scanner, new QueueArrayDown<>(), "Queue Array Down").run();
+                new QueueMenu(this.scanner, new QueueArrayDown<>(2), "Queue Array Down").run();
+                break;
             case "ql":
                 new QueueMenu(this.scanner, new QueueLinkedList<>(), "Queue Linked List").run();
+                break;
             case "su":
-                new StackMenu(this.scanner, new StackArrayUp<>(5), "Stack Array Up").run();
+                new StackMenu(this.scanner, new StackArrayUp<>(2), "Stack Array Up").run();
+                break;
             case "sd":
-                new StackMenu(this.scanner, new StackArrayDown<>(5), "Stack Array Down").run();
+                new StackMenu(this.scanner, new StackArrayDown<>(2), "Stack Array Down").run();
+                break;
             case "sl":
                 new StackMenu(this.scanner, new StackLinkedList<>(), "Stack Linked List").run();
+                break;
             default:
                 this.printInvalid();
         }
