@@ -1,14 +1,13 @@
 package lab3.shell;
 
 import lab1.shell.Menu;
-import lab3.stack.Stack;
+import lab3.dataStructures.stack.Stack;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class StackMenu extends Menu {
-    // Need university to save global state on faculty changes
     Stack<String> stack;
 
     public StackMenu(Scanner scanner, Stack<String> stack, String prompt) {

@@ -1,4 +1,4 @@
-package lab3.queue;
+package lab3.dataStructures.queue;
 
 public interface Queue<T> {
     void enqueue(T item);

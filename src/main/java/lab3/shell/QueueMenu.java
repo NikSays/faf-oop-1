@@ -1,14 +1,13 @@
 package lab3.shell;
 
 import lab1.shell.Menu;
-import lab3.queue.Queue;
+import lab3.dataStructures.queue.Queue;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class QueueMenu extends Menu {
-    // Need university to save global state on faculty changes
     Queue<String> queue;
 
     public QueueMenu(Scanner scanner, Queue<String> queue, String prompt) {

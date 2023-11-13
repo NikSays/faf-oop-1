@@ -1,4 +1,4 @@
-package lab3.stack;
+package lab3.dataStructures.stack;
 
 public interface Stack<T> {
     void push(T item);
