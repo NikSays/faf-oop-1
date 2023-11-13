@@ -23,8 +23,6 @@ public class StackArrayUp<T> implements Stack<T> {
 
         this.top++;
         this.arr.set(this.top, item);
-
-        System.out.println(this.arr);
     }
 
     @Override
@@ -34,8 +32,6 @@ public class StackArrayUp<T> implements Stack<T> {
 
         int index = this.top;
         this.top--;
-
-        System.out.println(this.arr);
         return this.arr.get(index);
 
     }

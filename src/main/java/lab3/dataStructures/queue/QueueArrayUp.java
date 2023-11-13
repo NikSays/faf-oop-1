@@ -23,8 +23,6 @@ public class QueueArrayUp<T> implements Queue<T> {
 
         this.tail++;
         this.arr.set(this.tail, item);
-
-        System.out.println(this.arr);
     }
 
     @Override
@@ -38,8 +36,6 @@ public class QueueArrayUp<T> implements Queue<T> {
             this.arr.set(i, this.arr.get(i + 1));
         }
         this.tail--;
-
-        System.out.println(this.arr);
         return item;
     }
 

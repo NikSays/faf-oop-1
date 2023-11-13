@@ -23,8 +23,6 @@ public class StackArrayDown<T> implements Stack<T> {
 
         this.free--;
         this.arr.set(this.free, item);
-
-        System.out.println(this.arr);
     }
 
     @Override
@@ -34,8 +32,6 @@ public class StackArrayDown<T> implements Stack<T> {
 
         int index = this.free;
         this.free++;
-
-        System.out.println(this.arr);
         return this.arr.get(index);
     }
 
