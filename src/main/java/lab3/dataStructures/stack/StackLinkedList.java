@@ -12,13 +12,19 @@ public class StackLinkedList<T> implements Stack<T> {
     }
 
     Node<T> head;
+    int size, used;
 
-    public StackLinkedList() {
+    public StackLinkedList(int n) {
         this.head = null;
+        this.size = n;
+        this.used = 0;
     }
 
     @Override
     public void push(T item) {
+        if (this.isFull())
+            throw new IllegalStateException("Stack is full");
+
         Node<T> newNode = new Node<T>(item);
         if (this.isEmpty()) {
             this.head = newNode;
@@ -26,6 +32,8 @@ public class StackLinkedList<T> implements Stack<T> {
         }
         newNode.next = this.head;
         this.head = newNode;
+
+        this.used++;
     }
 
     @Override
@@ -35,6 +43,8 @@ public class StackLinkedList<T> implements Stack<T> {
 
         T item = this.head.data;
         this.head = this.head.next;
+
+        this.used--;
         return item;
     }
 
@@ -53,7 +63,7 @@ public class StackLinkedList<T> implements Stack<T> {
 
     @Override
     public boolean isFull() {
-        return false;
+        return this.used == this.size - 1;
     }
 }
 

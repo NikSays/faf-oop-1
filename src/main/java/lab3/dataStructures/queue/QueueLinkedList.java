@@ -14,14 +14,20 @@ public class QueueLinkedList<T> implements Queue<T> {
     }
 
     Node<T> head, tail;
+    int size, used;
 
-    public QueueLinkedList() {
+    public QueueLinkedList(int n) {
         this.head = null;
         this.tail = null;
+        this.size = n;
+        this.used = 0;
     }
 
     @Override
     public void enqueue(T item) {
+        if (this.isFull())
+            throw new IllegalStateException("Queue is full");
+
         Node<T> node = new Node<>(item);
         if (this.isEmpty()) {
             this.head = node;
@@ -31,6 +37,8 @@ public class QueueLinkedList<T> implements Queue<T> {
 
         this.tail.next = node;
         this.tail = node;
+
+        this.used++;
     }
 
     @Override
@@ -45,6 +53,7 @@ public class QueueLinkedList<T> implements Queue<T> {
             this.tail = null;
         }
 
+        this.used--;
         return node.data;
     }
 
@@ -63,6 +72,6 @@ public class QueueLinkedList<T> implements Queue<T> {
 
     @Override
     public boolean isFull() {
-        return false;
+        return this.used == this.size - 1;
     }
 }
