@@ -26,26 +26,24 @@ public class QueueMenu extends Menu {
     protected boolean handleChoice(String input) {
         String[] args = input.split(" ", 2);
         switch (args[0]) {
-            case "enq": {
+            case "enq":
                 if (args.length != 2) {
                     System.out.println("Enter the string to enqueue");
                     break;
                 }
                 this.enqueue(args[1]);
                 break;
-            }
-            case "deq": {
+            case "deq":
                 this.dequeue();
                 break;
-            }
-            case "peek": {
+            case "peek":
                 this.peek();
                 break;
-            }
-            case "info": {
+            case "info":
                 this.info();
                 break;
-            }
+            case "exit":
+                return false;
             default:
                 this.printInvalid();
         }
@@ -55,7 +53,7 @@ public class QueueMenu extends Menu {
     private void enqueue(String item) {
         try {
             this.queue.enqueue(item);
-            System.out.println("Enqueued");
+            System.out.println("Enqueued: " + item);
         } catch (IllegalStateException e) {
             System.out.println(e.toString());
         }
@@ -71,7 +69,7 @@ public class QueueMenu extends Menu {
 
     private void peek() {
         try {
-            this.queue.peek();
+            System.out.println("Peeked: " + this.queue.peek());
         } catch (IllegalStateException e) {
             System.out.println(e.toString());
         }

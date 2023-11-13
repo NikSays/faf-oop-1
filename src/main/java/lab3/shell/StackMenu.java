@@ -26,26 +26,24 @@ public class StackMenu extends Menu {
     protected boolean handleChoice(String input) {
         String[] args = input.split(" ", 2);
         switch (args[0]) {
-            case "push": {
+            case "push":
                 if (args.length != 2) {
                     System.out.println("Enter the string to push");
                     break;
                 }
                 this.push(args[1]);
                 break;
-            }
-            case "pop": {
+            case "pop":
                 this.pop();
                 break;
-            }
-            case "peek": {
+            case "peek":
                 this.peek();
                 break;
-            }
-            case "info": {
+            case "info":
                 this.info();
                 break;
-            }
+            case "exit":
+                return false;
             default:
                 this.printInvalid();
         }
@@ -55,7 +53,7 @@ public class StackMenu extends Menu {
     private void push(String item) {
         try {
             this.stack.push(item);
-            System.out.println("Pushed");
+            System.out.println("Pushed: " + item);
         } catch (IllegalStateException e) {
             System.out.println(e.toString());
         }
